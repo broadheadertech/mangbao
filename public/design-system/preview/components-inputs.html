@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Mang Guabao · Form Inputs</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  body { margin: 0; padding: 22px; background: var(--bao-white); font-family: var(--font-body); display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+  .field label { display: block; font-weight: 900; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--leaf-green); margin-bottom: 4px; }
+  .field input, .field select { width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 2px solid rgba(27,67,50,0.15); background: #fff; font-family: var(--font-body); font-weight: 700; color: var(--saging-green); font-size: 14px; }
+  .field input:focus { outline: 0; border-color: var(--saffron-yellow); }
+  .qty { display: flex; align-items: center; gap: 10px; }
+  .qty button { width: 36px; height: 36px; border-radius: 999px; background: var(--saging-green); color: var(--saffron-yellow); border: 0; font-family: var(--font-subhead); font-size: 18px; cursor: pointer; }
+  .qty span { font-family: var(--font-subhead); color: var(--saging-green); font-size: 18px; }
+</style>
+</head>
+<body>
+  <div class="field"><label>Name</label><input type="text" value="Maria"/></div>
+  <div class="field"><label>Order Type</label><select><option>Dine-in</option><option>Takeout</option></select></div>
+  <div class="field"><label>Quantity</label>
+    <div class="qty"><button>−</button><span>2</span><button>+</button></div>
+  </div>
+  <div class="field"><label>Notes</label><input type="text" placeholder="Extra sili, please"/></div>
+</body>
+</html>

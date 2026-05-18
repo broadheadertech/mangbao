@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Mang Guabao · Buttons</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  body { margin: 0; padding: 26px; background: var(--bao-white); font-family: var(--font-body); display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; border: 0; cursor: pointer; padding: 14px 22px; border-radius: 14px; font-family: var(--font-subhead); font-size: 16px; line-height: 1; transition: transform 180ms ease, box-shadow 180ms ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .primary { background: var(--saffron-yellow); color: var(--saging-green); box-shadow: 0 4px 0 var(--lechon-brown); }
+  .secondary { background: var(--saging-green); color: var(--bao-white); box-shadow: 0 4px 0 #0F2A20; }
+  .ghost { background: transparent; color: var(--saging-green); border: 2px solid var(--saging-green); padding: 12px 20px; }
+  .alert { background: var(--sili-red); color: var(--bao-white); box-shadow: 0 4px 0 #7E0C16; }
+</style>
+</head>
+<body>
+  <button class="btn primary">Order Now</button>
+  <button class="btn secondary">Find a Store</button>
+  <button class="btn ghost">View Menu</button>
+  <button class="btn alert">🌶️ Spicy</button>
+</body>
+</html>

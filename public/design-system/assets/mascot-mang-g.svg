@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="Mang G mascot — a smiling bao wearing a salakot hat with chopsticks">
+  <defs>
+    <radialGradient id="bao-shade" cx="50%" cy="55%" r="55%">
+      <stop offset="60%" stop-color="#FFFDF7"></stop>
+      <stop offset="100%" stop-color="#E9E2CC"></stop>
+    </radialGradient>
+    <clipPath id="bao-clip"><circle cx="200" cy="220" r="105"></circle></clipPath>
+  </defs>
+
+  
+  <ellipse cx="200" cy="360" rx="90" ry="10" fill="#000" opacity="0.18"></ellipse>
+
+  
+  <g fill="#F4B942">
+    <path d="M82 198 l4 -12 l4 12 l12 4 l-12 4 l-4 12 l-4 -12 l-12 -4 z"></path>
+    <path d="M330 220 l3 -9 l3 9 l9 3 l-9 3 l-3 9 l-3 -9 l-9 -3 z"></path>
+    <path d="M118 330 l3 -8 l3 8 l8 3 l-8 3 l-3 8 l-3 -8 l-8 -3 z"></path>
+    <path d="M285 90 l2 -7 l2 7 l7 2 l-7 2 l-2 7 l-2 -7 l-7 -2 z"></path>
+  </g>
+
+  
+  <circle cx="200" cy="220" r="105" fill="url(#bao-shade)"></circle>
+  
+  <g fill="none" stroke="#E0D8BD" stroke-width="2" stroke-linecap="round" opacity="0.7">
+    <path d="M114 220 Q145 240 165 240"></path>
+    <path d="M286 220 Q255 240 235 240"></path>
+  </g>
+
+  
+  <g transform="translate(0 0)" stroke-linecap="round">
+    
+    <line x1="300" y1="170" x2="345" y2="335" stroke="#B8841E" stroke-width="11"></line>
+    <line x1="300" y1="170" x2="345" y2="335" stroke="#F4B942" stroke-width="8"></line>
+    <circle cx="300" cy="170" r="9" fill="#C1121F"></circle>
+    
+    <line x1="322" y1="160" x2="365" y2="328" stroke="#B8841E" stroke-width="11"></line>
+    <line x1="322" y1="160" x2="365" y2="328" stroke="#F4B942" stroke-width="8"></line>
+    <circle cx="322" cy="160" r="9" fill="#C1121F"></circle>
+  </g>
+
+  
+  <g clip-path="url(#bao-clip)">
+    <circle cx="200" cy="220" r="105" fill="url(#bao-shade)"></circle>
+  </g>
+
+  
+  <g>
+    
+    <ellipse cx="200" cy="148" rx="100" ry="16" fill="#6B3A2A" opacity="0.15"></ellipse>
+    
+    <ellipse cx="200" cy="130" rx="120" ry="22" fill="#F4B942"></ellipse>
+    <ellipse cx="200" cy="125" rx="120" ry="14" fill="#FFD06B"></ellipse>
+    
+    <ellipse cx="200" cy="106" rx="40" ry="30" fill="#F4B942"></ellipse>
+    <ellipse cx="200" cy="100" rx="30" ry="18" fill="#FFD06B"></ellipse>
+  </g>
+
+  
+  <g fill="#1B4332">
+    <circle cx="172" cy="200" r="10"></circle>
+    <circle cx="228" cy="200" r="10"></circle>
+    <circle cx="175" cy="197" r="3" fill="#FFFDF7"></circle>
+    <circle cx="231" cy="197" r="3" fill="#FFFDF7"></circle>
+  </g>
+
+  
+  <ellipse cx="148" cy="245" rx="12" ry="7" fill="#F4B942" opacity="0.55"></ellipse>
+  <ellipse cx="252" cy="245" rx="12" ry="7" fill="#F4B942" opacity="0.55"></ellipse>
+
+  <!-- Mustache — handlebar silhouette, tapered curls pointing slightly up -->
+  <g fill="#6B3A2A">
+    <path d="M160 230
+             Q170 222 184 228
+             Q194 234 200 232
+             Q206 234 216 228
+             Q230 222 240 230
+             Q232 242 218 238
+             Q208 236 200 238
+             Q192 236 182 238
+             Q168 242 160 230 Z"/>
+  </g>
+
+  <!-- Mouth — clearly separate smile below, thin unfilled arc -->
+  <path d="M180 268 Q200 282 220 268"
+        fill="none" stroke="#6B3A2A" stroke-width="3.5"
+        stroke-linecap="round"/>
+</svg>

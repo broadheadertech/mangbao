@@ -1,0 +1,242 @@
+/* ========================================================
+   Mang Guabao — Design Tokens
+   Hawak ang Sarap · Filipino Fusion Bao · Manila 2025
+   ======================================================== */
+
+/* --- Webfonts ---------------------------------------------
+   All four families are on Google Fonts. We import via CSS
+   so a project can use this file standalone, but the
+   /fonts folder is also populated for offline use.
+----------------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lilita+One&family=Nunito:wght@400;600;700;800;900&family=Caveat:wght@400;600;700&display=swap");
+
+:root {
+  /* ============ COLOR ============ */
+
+  /* Brand — six anchors */
+  --saging-green:  #1B4332; /* Primary brand anchor */
+  --saffron-yellow: #F4B942; /* Accent · energy & warmth */
+  --bao-white:     #FFFDF7; /* Background · clean & soft */
+  --leaf-green:    #52B788; /* Secondary · fresh contrast */
+  --lechon-brown:  #6B3A2A; /* Shadow & depth */
+  --sili-red:      #C1121F; /* Alert · spicy & promo */
+
+  /* Tonal extensions (derived, not in source doc) */
+  --saging-900:    #0F2A20;
+  --saging-700:    #1B4332;
+  --saging-500:    #2E6049;
+  --saging-300:    #71957F;
+  --saffron-300:   #FFE7A8;
+  --saffron-700:   #B8841E;
+  --leaf-300:      #A3D9BB;
+
+  /* Semantic — foreground */
+  --fg-on-dark:    #FFFDF7;       /* Bao White on Saging */
+  --fg-on-dark-muted: rgba(255,253,247, 0.72);
+  --fg-on-dark-faint: rgba(255,253,247, 0.32);
+  --fg-on-light:   #1B4332;       /* Saging on Bao White */
+  --fg-on-light-muted: #3E5C4E;
+  --fg-accent:     #F4B942;       /* Saffron on anything dark */
+  --fg-handwritten: #52B788;      /* Caveat tagline color */
+
+  /* Semantic — background */
+  --bg-page:       #FFFDF7;
+  --bg-page-dark:  #1B4332;
+  --bg-surface:    #FFFFFF;
+  --bg-surface-dark: #0F2A20;
+  --bg-card-yellow:#F4B942;
+  --bg-card-brown: #6B3A2A;
+  --bg-card-leaf:  #52B788;
+
+  /* Semantic — borders */
+  --border-hairline-dark:  rgba(255,253,247, 0.10);
+  --border-hairline-light: rgba(27, 67, 50, 0.10);
+  --border-saffron-2: 2px solid var(--saffron-yellow);
+
+  /* Status */
+  --status-bestseller-bg: var(--sili-red);
+  --status-spicy-bg: var(--leaf-green);
+  --status-bestseller-fg: var(--bao-white);
+
+  /* ============ TYPE ============ */
+
+  /* Families */
+  --font-display:  "Bebas Neue", "Anton", "Impact", sans-serif;
+  --font-subhead:  "Lilita One", "Bowlby One", "Fredoka", system-ui, sans-serif;
+  --font-body:     "Nunito", "Inter", system-ui, -apple-system, sans-serif;
+  --font-script:   "Caveat", "Caveat Brush", "Bradley Hand", cursive;
+
+  /* Sizes — fluid-ish, rem-based */
+  --fs-display-xl: 5.0rem;   /* 80px — hero MANG GUABAO */
+  --fs-display-l:  3.5rem;   /* 56px */
+  --fs-display-m:  2.5rem;   /* 40px — section titles in Lilita */
+  --fs-display-s:  1.75rem;  /* 28px */
+  --fs-title:      1.25rem;  /* 20px — card titles */
+  --fs-body:       1.0rem;   /* 16px */
+  --fs-small:      0.875rem; /* 14px */
+  --fs-eyebrow:    0.8125rem;/* 13px — letter-spaced */
+  --fs-pill:       0.75rem;  /* 12px — BESTSELLER/SPICY */
+  --fs-script:     1.5rem;   /* 24px — Caveat default */
+
+  /* Weights */
+  --fw-display:    400; /* Bebas/Lilita have one weight */
+  --fw-body:       700;
+  --fw-body-bold:  800;
+  --fw-body-black: 900;
+
+  /* Letter spacing */
+  --ls-display:    0.01em;
+  --ls-eyebrow:    0.18em;
+  --ls-pill:       0.08em;
+
+  /* Line height */
+  --lh-display:    0.95;
+  --lh-title:      1.15;
+  --lh-body:       1.5;
+
+  /* The signature Bebas drop shadow */
+  --text-shadow-bebas: 0.25em 0.25em 0 var(--lechon-brown);
+  --text-shadow-bebas-tight: 4px 4px 0 var(--lechon-brown);
+
+  /* ============ SPACE / RADII / ELEVATION ============ */
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  --radius-pill:   999px;
+  --radius-card:   20px;
+  --radius-inner:  12px;
+  --radius-button: 14px;
+  --radius-input:  10px;
+
+  --shadow-soft:   0 8px 24px rgba(27, 67, 50, 0.12);
+  --shadow-card:   0 4px 16px rgba(27, 67, 50, 0.10);
+  --shadow-press:  0 1px 2px rgba(27, 67, 50, 0.20);
+
+  --duration-fast:   180ms;
+  --duration-medium: 240ms;
+  --ease-out:        cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* ============ SEMANTIC TYPOGRAPHY ============ */
+}
+
+/* Base */
+html, body {
+  font-family: var(--font-body);
+  font-weight: var(--fw-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--fg-on-light);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Semantic blocks */
+.mg-h-display,
+h1.mg-display {
+  font-family: var(--font-display);
+  font-weight: var(--fw-display);
+  font-size: var(--fs-display-xl);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+  color: var(--saffron-yellow);
+  text-shadow: var(--text-shadow-bebas);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.mg-h-display--white { color: var(--bao-white); }
+.mg-h-display--saging { color: var(--saging-green); text-shadow: 4px 4px 0 rgba(27,67,50,0.15); }
+
+.mg-h-section,
+h2.mg-section {
+  font-family: var(--font-subhead);
+  font-weight: 400;
+  font-size: var(--fs-display-m);
+  line-height: var(--lh-title);
+  color: var(--saging-green);
+  margin: 0;
+}
+.mg-h-section--white { color: var(--bao-white); }
+
+.mg-h-title,
+h3.mg-title {
+  font-family: var(--font-subhead);
+  font-weight: 400;
+  font-size: var(--fs-title);
+  line-height: var(--lh-title);
+  color: var(--saging-green);
+  margin: 0;
+}
+
+.mg-eyebrow {
+  font-family: var(--font-body);
+  font-weight: var(--fw-body-black);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--leaf-green);
+}
+
+.mg-tagline {
+  font-family: var(--font-script);
+  font-weight: 600;
+  font-size: var(--fs-script);
+  color: var(--leaf-green);
+  letter-spacing: 0;
+}
+.mg-tagline--saffron { color: var(--saffron-yellow); }
+.mg-tagline--brown { color: var(--lechon-brown); }
+
+.mg-body,
+p.mg-body {
+  font-family: var(--font-body);
+  font-weight: var(--fw-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--fg-on-light);
+  text-wrap: pretty;
+}
+
+.mg-small {
+  font-family: var(--font-body);
+  font-weight: var(--fw-body);
+  font-size: var(--fs-small);
+  color: var(--fg-on-light-muted);
+}
+
+.mg-price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--saffron-yellow);
+  letter-spacing: var(--ls-display);
+}
+
+/* Pills */
+.mg-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-weight: var(--fw-body-black);
+  font-size: var(--fs-pill);
+  letter-spacing: var(--ls-pill);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.mg-pill--bestseller { background: var(--sili-red); color: var(--bao-white); }
+.mg-pill--spicy { background: var(--leaf-green); color: var(--bao-white); }
+.mg-pill--outline-saffron {
+  background: transparent;
+  color: var(--saffron-yellow);
+  border: var(--border-saffron-2);
+}

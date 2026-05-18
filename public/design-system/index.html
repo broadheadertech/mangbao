@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Mang Guabao · Design System Reference</title>
+<link rel="stylesheet" href="./colors_and_type.css"/>
+<style>
+  html, body { background: var(--bao-white); margin: 0; }
+  body { font-family: var(--font-body); color: var(--saging-green); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 48px 24px 96px; }
+  h1 { font-family: var(--font-display); font-size: 64px; line-height: 0.95; letter-spacing: 0.02em;
+       color: var(--saging-green); text-shadow: 4px 4px 0 rgba(27,67,50,0.15); text-transform: uppercase; margin: 0; }
+  .eyebrow { font-weight: 900; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--leaf-green); margin-bottom: 8px; }
+  .tag { font-family: var(--font-script); font-size: 28px; color: var(--leaf-green); }
+  section { margin-top: 48px; }
+  h2 { font-family: var(--font-subhead); font-size: 32px; color: var(--saging-green); margin: 0 0 4px; }
+  .desc { font-weight: 700; color: var(--fg-on-light-muted); max-width: 580px; margin: 0 0 18px; }
+  ul.cards { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  ul.cards a { display: block; padding: 16px; background: white; border: 1px solid rgba(27,67,50,0.10); border-radius: 16px;
+               text-decoration: none; color: var(--saging-green); font-family: var(--font-subhead); font-size: 18px;
+               transition: transform 180ms cubic-bezier(.2,.7,.2,1), box-shadow 180ms ease; }
+  ul.cards a:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(27,67,50,0.10); }
+  ul.cards a small { display: block; font-family: var(--font-body); font-weight: 700; font-size: 12px;
+                     color: var(--fg-on-light-muted); margin-top: 4px; letter-spacing: 0; text-transform: none; }
+  .back { display: inline-block; margin-top: 8px; font-weight: 900; font-size: 13px; letter-spacing: 0.16em;
+          text-transform: uppercase; color: var(--saging-green); text-decoration: none; border-bottom: 2px solid var(--saffron-yellow); padding-bottom: 2px; }
+  @media (max-width: 600px) {
+    .wrap { padding: 32px 16px 64px; }
+    h1 { font-size: 44px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Brand Reference</div>
+  <h1>Mang Guabao<br/>Design System</h1>
+  <p class="tag">Hawak ang Sarap.</p>
+  <p class="desc">Static reference for tokens, components, packaging mocks, and brand-deck slides. The marketing site at <a href="/" style="color:var(--saging-green);font-weight:800;">/</a> is the live React implementation.</p>
+  <a class="back" href="/">← Back to site</a>
+
+  <section>
+    <h2>Foundations</h2>
+    <p class="desc">Colors, typography, spacing, and brand marks. One small card per token cluster.</p>
+    <ul class="cards">
+      <li><a href="./preview/colors-primary.html">Colors · Primary <small>The six brand anchors</small></a></li>
+      <li><a href="./preview/colors-supporting.html">Colors · Supporting <small>Tonal extensions</small></a></li>
+      <li><a href="./preview/colors-pairings.html">Colors · Pairings <small>Approved combinations</small></a></li>
+      <li><a href="./preview/type-scale.html">Type · Scale <small>Display → small</small></a></li>
+      <li><a href="./preview/type-display.html">Type · Display <small>Bebas Neue</small></a></li>
+      <li><a href="./preview/type-subhead.html">Type · Subhead <small>Lilita One</small></a></li>
+      <li><a href="./preview/type-body.html">Type · Body <small>Nunito</small></a></li>
+      <li><a href="./preview/type-script.html">Type · Script <small>Caveat</small></a></li>
+      <li><a href="./preview/spacing-scale.html">Spacing · Scale <small>4–64px</small></a></li>
+      <li><a href="./preview/spacing-radii.html">Spacing · Radii <small>Pill, card, inner</small></a></li>
+      <li><a href="./preview/spacing-elevation.html">Spacing · Elevation <small>Shadows + press states</small></a></li>
+      <li><a href="./preview/brand-logo-lockup.html">Brand · Lockup <small>MANG GUABAO + tagline</small></a></li>
+      <li><a href="./preview/brand-mascot.html">Brand · Mascot <small>Mang G anatomy</small></a></li>
+      <li><a href="./preview/brand-iconography.html">Brand · Iconography <small>Apple-style emoji set</small></a></li>
+      <li><a href="./preview/brand-neon-wall.html">Brand · Neon Wall <small>In-store moment</small></a></li>
+      <li><a href="./preview/brand-packaging.html">Brand · Packaging <small>Wrapper composition</small></a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Components</h2>
+    <p class="desc">Buttons, pills, inputs, menu rows, voice cards — the small parts that build the marketing site.</p>
+    <ul class="cards">
+      <li><a href="./preview/components-buttons.html">Buttons <small>Primary / on-dark / ghost</small></a></li>
+      <li><a href="./preview/components-pills.html">Pills <small>Bestseller / Spicy / New</small></a></li>
+      <li><a href="./preview/components-inputs.html">Inputs <small>Text fields and search</small></a></li>
+      <li><a href="./preview/components-menu-row.html">Menu rows <small>Name · Description · Price</small></a></li>
+      <li><a href="./preview/components-voice-cards.html">Voice cards <small>Four tone pillars</small></a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>UI kits</h2>
+    <p class="desc">Higher-fidelity artboards composed from the foundations.</p>
+    <ul class="cards">
+      <li><a href="./ui_kits/packaging/index.html">Packaging <small>Wrapper, cup, tray, bag, receipt, neon</small></a></li>
+      <li><a href="./slides/index.html">Brand deck <small>16:9 slides modeled on the source doc</small></a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Source</h2>
+    <p class="desc">The 11 original brand-doc screenshots this system was built from.</p>
+    <ul class="cards">
+      <li><a href="./source/01.jpg">01 — Cover</a></li>
+      <li><a href="./source/02.jpg">02 — Mascot anatomy</a></li>
+      <li><a href="./source/03.jpg">03 — Packaging</a></li>
+      <li><a href="./source/04.jpg">04 — Menu</a></li>
+      <li><a href="./source/05.jpg">05 — Palette</a></li>
+      <li><a href="./source/06.jpg">06 — Typography</a></li>
+      <li><a href="./source/07.jpg">07 — Voice</a></li>
+      <li><a href="./source/08.jpg">08 — Mascot symbolism</a></li>
+      <li><a href="./source/09.jpg">09 — In-store</a></li>
+      <li><a href="./source/10.jpg">10 — Voice pillars</a></li>
+      <li><a href="./source/11.jpg">11 — Tray liner</a></li>
+    </ul>
+  </section>
+</div>
+</body>
+</html>

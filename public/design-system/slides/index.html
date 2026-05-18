@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Mang Guabao · Brand Deck</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  html, body { margin: 0; background: #0F2A20; }
+  deck-stage { --bg: #0F2A20; }
+
+  /* Per-slide canvas */
+  section {
+    width: 1920px; height: 1080px; box-sizing: border-box;
+    background: var(--saging-green); color: var(--bao-white);
+    position: relative; overflow: hidden;
+    background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 36px);
+  }
+  section.light { background: var(--bao-white); color: var(--saging-green); background-image: none; }
+  section.yellow { background: var(--saffron-yellow); color: var(--saging-green); background-image: none; }
+
+  .pad { padding: 96px 120px; height: 100%; box-sizing: border-box; }
+  .eyebrow { font-family: var(--font-body); font-weight: 900; font-size: 22px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--leaf-green); margin: 0 0 18px; }
+  section.light .eyebrow, section.yellow .eyebrow { color: var(--saging-green); opacity: 0.55; }
+  .h2 { font-family: var(--font-subhead); font-size: 96px; line-height: 1.0; margin: 0; color: var(--saging-green); }
+  .h2-dark { color: var(--bao-white); }
+  .display { font-family: var(--font-display); font-size: 240px; line-height: 0.95; color: var(--saffron-yellow); text-shadow: 12px 12px 0 var(--lechon-brown); letter-spacing: 0.02em; margin: 0; }
+  .display-2 { font-family: var(--font-display); font-size: 240px; line-height: 0.95; color: var(--bao-white); text-shadow: 12px 12px 0 var(--lechon-brown); letter-spacing: 0.02em; margin: 0; }
+  .tag { font-family: var(--font-script); font-weight: 600; color: var(--leaf-green); font-size: 56px; }
+  .tag-saffron { color: var(--saffron-yellow); }
+  .tag-brown { color: var(--lechon-brown); }
+  .pill-est { display: inline-block; padding: 22px 44px; border-radius: 999px; border: 4px solid var(--saffron-yellow); color: var(--saffron-yellow); font-family: var(--font-body); font-weight: 900; font-size: 26px; letter-spacing: 0.18em; }
+  .footer { position: absolute; left: 120px; bottom: 56px; font-family: var(--font-body); font-weight: 900; font-size: 18px; letter-spacing: 0.22em; opacity: 0.45; }
+  .pageno { position: absolute; right: 120px; bottom: 56px; font-family: var(--font-display); font-size: 36px; opacity: 0.4; letter-spacing: 0.06em; }
+
+  /* Slide-specific */
+  .color-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .swatch { background: var(--bao-white); color: var(--saging-green); border-radius: 28px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+  .swatch .chip { height: 200px; }
+  .swatch .body { padding: 22px 28px 26px; }
+  .swatch .name { font-family: var(--font-subhead); font-size: 32px; color: var(--saging-green); }
+  .swatch .hex { font-family: ui-monospace, monospace; font-size: 18px; color: var(--fg-on-light-muted); margin-top: 4px; }
+  .swatch .role { font-weight: 700; font-size: 16px; color: var(--fg-on-light-muted); margin-top: 6px; }
+
+  .trait { display: grid; grid-template-columns: auto 1fr; gap: 24px; background: var(--bao-white); color: var(--saging-green); border-radius: 22px; padding: 22px 28px; border-left: 8px solid var(--saffron-yellow); }
+  .trait .glyph { font-size: 56px; line-height: 1; }
+  .trait .title { font-family: var(--font-subhead); font-size: 32px; }
+  .trait .desc { font-weight: 700; font-size: 20px; line-height: 1.4; margin-top: 4px; }
+
+  .voice { border-radius: 24px; padding: 32px 36px; position: relative; overflow: hidden; }
+  .voice .n { position: absolute; right: 28px; top: 4px; font-family: var(--font-display); font-size: 200px; opacity: 0.16; line-height: 1; }
+  .voice .title { font-family: var(--font-subhead); font-size: 48px; line-height: 1.05; }
+  .voice .desc { font-weight: 700; font-size: 22px; line-height: 1.4; margin-top: 8px; opacity: 0.92; max-width: 560px; }
+  .voice .quote { font-family: var(--font-script); font-size: 28px; margin-top: 14px; border-top: 2px solid currentColor; padding-top: 12px; opacity: 0.9; }
+  .voice.green { background: var(--saging-green); color: var(--bao-white); }
+  .voice.yellow { background: var(--saffron-yellow); color: var(--saging-green); }
+  .voice.brown { background: var(--lechon-brown); color: var(--bao-white); }
+  .voice.leaf { background: var(--leaf-green); color: var(--saging-green); }
+
+  .menu-card { background: var(--saging-green); border-radius: 28px; padding: 36px 48px; max-width: 1200px; margin: 0 auto; }
+  .menu-head { display: flex; gap: 24px; align-items: center; padding-bottom: 14px; border-bottom: 2px solid rgba(255,253,247,0.10); }
+  .menu-row { display: grid; grid-template-columns: 1fr auto; padding: 20px 0; border-bottom: 2px dashed rgba(255,253,247,0.10); align-items: start; gap: 24px; }
+  .menu-row:last-child { border-bottom: 0; }
+  .menu-name { display: flex; gap: 14px; align-items: center; font-family: var(--font-subhead); color: var(--saffron-yellow); font-size: 36px; }
+  .menu-desc { color: rgba(255,253,247,0.72); font-weight: 700; font-size: 22px; margin-top: 4px; }
+  .menu-price { font-family: var(--font-display); color: var(--saffron-yellow); font-size: 52px; }
+  .menu-price .peso { font-size: 32px; vertical-align: 10px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 999px; font-weight: 900; font-size: 16px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .pill.bs { background: var(--sili-red); color: var(--bao-white); }
+  .pill.sp { background: var(--leaf-green); color: var(--bao-white); }
+
+  /* Title slide layout */
+  .title-stack { display: flex; flex-direction: column; align-items: center; gap: 28px; text-align: center; height: 100%; justify-content: center; }
+  .title-stack img { width: 360px; height: 360px; }
+</style>
+
+<script src="deck-stage.js"></script>
+
+<script type="application/json" id="speaker-notes">
+[]
+</script>
+</head>
+<body>
+<deck-stage>
+
+  <!-- 1 · Title -->
+  <section data-screen-label="01 Title">
+    <div class="title-stack">
+      <img src="../assets/mascot-mang-g.svg" alt=""/>
+      <h1 class="display">MANG</h1>
+      <h1 class="display-2" style="margin-top:-32px;">GUABAO</h1>
+      <div class="tag" style="font-size:72px;margin-top:16px;">Hawak ang Sarap</div>
+      <div style="margin-top:24px;color:rgba(255,253,247,0.55);font-weight:900;letter-spacing:0.22em;font-size:22px;">HOLDING FLAVOR &nbsp;·&nbsp; FILIPINO FUSION BAO</div>
+      <div style="margin-top:36px;"><span class="pill-est">EST. 2025 &nbsp;·&nbsp; MANILA, PHILIPPINES</span></div>
+    </div>
+  </section>
+
+  <!-- 2 · Palette -->
+  <section data-screen-label="02 Palette" class="light">
+    <div class="pad">
+      <div class="eyebrow">01 — BRAND COLORS</div>
+      <h2 class="h2">The Palette</h2>
+      <div style="height:48px;"></div>
+      <div class="color-grid">
+        <div class="swatch"><div class="chip" style="background:#1B4332"></div><div class="body"><div class="name">SAGING GREEN</div><div class="hex">#1B4332</div><div class="role">Primary — Brand anchor</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#F4B942"></div><div class="body"><div class="name">SAFFRON YELLOW</div><div class="hex">#F4B942</div><div class="role">Accent — Energy &amp; warmth</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#FFFDF7"></div><div class="body"><div class="name">BAO WHITE</div><div class="hex">#FFFDF7</div><div class="role">Background — Clean &amp; soft</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#52B788"></div><div class="body"><div class="name">LEAF GREEN</div><div class="hex">#52B788</div><div class="role">Secondary — Fresh contrast</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#6B3A2A"></div><div class="body"><div class="name">LECHON BROWN</div><div class="hex">#6B3A2A</div><div class="role">Shadow &amp; depth</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#C1121F"></div><div class="body"><div class="name">SILI RED</div><div class="hex">#C1121F</div><div class="role">Alert — Spicy &amp; promo</div></div></div>
+      </div>
+    </div>
+    <div class="footer" style="color:var(--saging-green);">MANG GUABAO · BRAND IDENTITY</div>
+    <div class="pageno" style="color:var(--saging-green);">02</div>
+  </section>
+
+  <!-- 3 · Typography -->
+  <section data-screen-label="03 Typography">
+    <div class="pad">
+      <div class="eyebrow">02 — TYPOGRAPHY</div>
+      <h2 class="h2 h2-dark">The Fonts</h2>
+      <div style="height:48px;"></div>
+      <div style="background:var(--saging-green);border:3px solid rgba(82,183,136,0.3);border-radius:32px;padding:56px 72px;">
+        <div class="display" style="font-size:180px;">MANG GUABAO</div>
+        <div style="height:24px;"></div>
+        <div style="font-family:var(--font-subhead);color:var(--leaf-green);font-size:64px;">Filipino Soul. Bao'd Up.</div>
+        <div style="height:24px;"></div>
+        <p style="color:rgba(255,253,247,0.85);font-weight:700;font-size:26px;line-height:1.5;max-width:880px;margin:0;">From the streets of Manila to the world — every bao tells a story of bold flavors, Filipino pride, and the warmth of shared food. Hawak ang sarap.</p>
+        <div style="height:20px;"></div>
+        <div class="tag tag-saffron" style="font-size:48px;">"Sulit na sulit ka dito."</div>
+        <div style="height:36px;"></div>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;">
+          <div style="border:3px solid rgba(82,183,136,0.3);border-radius:14px;padding:12px 22px;color:var(--saffron-yellow);font-weight:900;letter-spacing:0.16em;font-size:20px;">BEBAS NEUE — HEADLINES &amp; LOGO</div>
+          <div style="border:3px solid rgba(82,183,136,0.3);border-radius:14px;padding:12px 22px;color:var(--saffron-yellow);font-weight:900;letter-spacing:0.16em;font-size:20px;">LILITA ONE — SUBHEADINGS</div>
+          <div style="border:3px solid rgba(82,183,136,0.3);border-radius:14px;padding:12px 22px;color:var(--saffron-yellow);font-weight:900;letter-spacing:0.16em;font-size:20px;">NUNITO — BODY &amp; UI</div>
+          <div style="border:3px solid rgba(82,183,136,0.3);border-radius:14px;padding:12px 22px;color:var(--saffron-yellow);font-weight:900;letter-spacing:0.16em;font-size:20px;">CAVEAT — HANDWRITTEN ACCENT</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">MANG GUABAO · BRAND IDENTITY</div>
+    <div class="pageno">03</div>
+  </section>
+
+  <!-- 4 · Mascot -->
+  <section data-screen-label="04 Mascot">
+    <div class="pad" style="display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center;">
+      <div style="text-align:center;">
+        <div class="eyebrow" style="text-align:left;">03 — BRAND MASCOT</div>
+        <h2 class="h2 h2-dark" style="text-align:left;">Meet Mang G</h2>
+        <div style="height:48px;"></div>
+        <img src="../assets/mascot-mang-g.svg" style="width:520px;height:520px;" alt=""/>
+      </div>
+      <div style="display:grid;gap:18px;">
+        <div class="trait"><div class="glyph">🌿</div><div><div class="title">Salakot Hat</div><div class="desc">The traditional Filipino woven hat — signals local pride and cultural roots at a glance.</div></div></div>
+        <div class="trait"><div class="glyph">🥟</div><div><div class="title">Bao Body</div><div class="desc">The mascot IS the product — pillowy, warm, and friendly. Impossible to mistake what you're selling.</div></div></div>
+        <div class="trait"><div class="glyph">👨</div><div><div class="title">The Mustache</div><div class="desc">"Mang" energy — that beloved older Filipino uncle who always feeds everyone. Approachable authority.</div></div></div>
+        <div class="trait"><div class="glyph">🥢</div><div><div class="title">Chopsticks + Filipino Food</div><div class="desc">Signals the fusion concept immediately — East-Asian bao technique, Filipino flavors.</div></div></div>
+      </div>
+    </div>
+    <div class="footer">MANG GUABAO · BRAND IDENTITY</div>
+    <div class="pageno">04</div>
+  </section>
+
+  <!-- 5 · Voice -->
+  <section data-screen-label="05 Voice" class="light">
+    <div class="pad">
+      <div class="eyebrow">07 — BRAND VOICE</div>
+      <h2 class="h2">How Mang G Talks</h2>
+      <div style="height:36px;"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div class="voice green"><div class="n">01</div><div class="title">Makulit</div><div class="desc">Playful, a little cheeky, never annoying. Like that friend who always has a joke but genuinely means well.</div><div class="quote">"Bakit ka pa pumunta ng ibang lugar? Nandito na lahat."</div></div>
+        <div class="voice yellow"><div class="n">02</div><div class="title">Proud</div><div class="desc">Unapologetically Filipino. Never tries to be Western. Owns its roots like a badge of honor.</div><div class="quote">"Ito ang aming bao. Filipino to the bone."</div></div>
+        <div class="voice brown"><div class="n">03</div><div class="title">Generous</div><div class="desc">Always makes you feel welcome and fed. The Mang Inasal unlimited rice energy, but cooler.</div><div class="quote">"Sulit na sulit ka dito, promise."</div></div>
+        <div class="voice leaf"><div class="n">04</div><div class="title">Aspirational</div><div class="desc">Street food that made it. For Filipinos who want global flavors without losing their identity.</div><div class="quote">"World-class lasa. Presyo na para sa lahat."</div></div>
+      </div>
+    </div>
+    <div class="footer" style="color:var(--saging-green);">MANG GUABAO · BRAND IDENTITY</div>
+    <div class="pageno" style="color:var(--saging-green);">05</div>
+  </section>
+
+  <!-- 6 · Menu -->
+  <section data-screen-label="06 Menu" class="light">
+    <div class="pad">
+      <div class="eyebrow">06 — MENU DESIGN</div>
+      <h2 class="h2">The Menu Feel</h2>
+      <div style="height:48px;"></div>
+      <div class="menu-card">
+        <div class="menu-head">
+          <div style="font-size:64px;line-height:1;">🥟</div>
+          <div>
+            <div style="font-family:var(--font-display);color:var(--saffron-yellow);font-size:72px;line-height:1;text-shadow:6px 6px 0 var(--lechon-brown);letter-spacing:0.02em;">MANG GUABAO</div>
+            <div style="color:var(--leaf-green);font-weight:900;letter-spacing:0.22em;font-size:18px;margin-top:6px;">SIGNATURE BAOS</div>
+          </div>
+        </div>
+        <div class="menu-row">
+          <div><div class="menu-name">Sisig Bao <span class="pill bs">Bestseller</span></div><div class="menu-desc">Sizzling sisig, chicharon bits, egg aioli, pickled papaya slaw</div></div>
+          <div class="menu-price"><span class="peso">₱</span>119</div>
+        </div>
+        <div class="menu-row">
+          <div><div class="menu-name">Lechon Bao</div><div class="menu-desc">Slow-roasted lechon, liver sauce, green onion</div></div>
+          <div class="menu-price"><span class="peso">₱</span>129</div>
+        </div>
+        <div class="menu-row">
+          <div><div class="menu-name">Bicol Express Bao <span class="pill sp">🌶️ Spicy</span></div><div class="menu-desc">Coconut pork, green chili, crispy shallots</div></div>
+          <div class="menu-price"><span class="peso">₱</span>109</div>
+        </div>
+        <div class="menu-row">
+          <div><div class="menu-name">Longganisa Bao</div><div class="menu-desc">Sweet pork longganisa, garlic rice crumble, fried egg crumble</div></div>
+          <div class="menu-price"><span class="peso">₱</span>99</div>
+        </div>
+        <div class="menu-row">
+          <div><div class="menu-name">Adobo Bao</div><div class="menu-desc">Chicken adobo flakes, garlic chips, vinegar slaw</div></div>
+          <div class="menu-price"><span class="peso">₱</span>109</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer" style="color:var(--saging-green);">MANG GUABAO · BRAND IDENTITY</div>
+    <div class="pageno" style="color:var(--saging-green);">06</div>
+  </section>
+
+  <!-- 7 · Neon / In-store moment -->
+  <section data-screen-label="07 Neon Wall">
+    <div class="pad" style="display:flex;flex-direction:column;justify-content:center;">
+      <div class="eyebrow">04 — IN-STORE MOMENT</div>
+      <h2 class="h2 h2-dark">The Instagram Wall</h2>
+      <div style="height:48px;"></div>
+      <div style="background:#0A1B14;border-radius:36px;padding:120px 80px;text-align:center;box-shadow:inset 0 0 200px rgba(0,0,0,0.5);">
+        <div style="font-family:var(--font-script);font-weight:700;font-size:200px;line-height:1;color:var(--saffron-yellow);text-shadow:0 0 24px rgba(244,185,66,0.95), 0 0 60px rgba(244,185,66,0.7), 0 0 120px rgba(244,185,66,0.45);">Hawak ang Sarap <span style="font-size:140px;vertical-align:30px;">✦</span></div>
+        <div style="margin-top:40px;font-family:var(--font-body);font-weight:900;font-size:32px;letter-spacing:0.30em;color:var(--leaf-green);text-shadow:0 0 12px rgba(82,183,136,0.8), 0 0 32px rgba(82,183,136,0.5);">MANG GUABAO &nbsp;·&nbsp; FILIPINO FUSION BAO</div>
+      </div>
+      <div style="margin-top:32px;text-align:center;color:rgba(255,253,247,0.65);font-weight:900;font-size:20px;letter-spacing:0.22em;">EVERY STORE HAS THIS NEON SIGN — THE SOCIAL MEDIA MOMENT THAT MARKETS ITSELF</div>
+    </div>
+    <div class="footer">MANG GUABAO · BRAND IDENTITY</div>
+    <div class="pageno">07</div>
+  </section>
+
+  <!-- 8 · Closing -->
+  <section data-screen-label="08 Closing">
+    <div class="title-stack" style="gap:24px;">
+      <h1 class="display" style="font-size:280px;">MANG GUABAO</h1>
+      <div class="tag" style="font-size:80px;">Hawak ang Sarap</div>
+      <div style="margin-top:48px;color:rgba(255,253,247,0.45);font-weight:900;letter-spacing:0.30em;font-size:20px;">BRAND IDENTITY DOCUMENT · 2025</div>
+    </div>
+  </section>
+
+</deck-stage>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" width="600" height="360" role="img" aria-label="Mang Guabao wordmark with mascot">
+  
+  
+  <g transform="translate(212 -10) scale(0.43)">
+    <use></use>
+  </g>
+  <image href="mascot-mang-g.svg" x="225" y="-10" width="150" height="150"></image>
+  
+  <text x="300" y="220" text-anchor="middle" class="display" fill="#6B3A2A">MANG</text>
+  <text x="296" y="216" text-anchor="middle" class="display" fill="#F4B942">MANG</text>
+  
+  <text x="300" y="296" text-anchor="middle" class="display" fill="#6B3A2A">GUABAO</text>
+  <text x="296" y="292" text-anchor="middle" class="display" fill="#FFFDF7">GUABAO</text>
+  
+  <text x="300" y="338" text-anchor="middle" class="tag" fill="#52B788">Hawak ang Sarap</text>
+</svg>

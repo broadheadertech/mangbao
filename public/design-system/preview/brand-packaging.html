@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Mang Guabao · Packaging Mocks</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  body { margin: 0; padding: 16px; background: var(--bao-white); font-family: var(--font-body); display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pkg { border-radius: 18px; padding: 22px 18px; text-align: center; position: relative; overflow: hidden; min-height: 220px; box-shadow: var(--shadow-soft); }
+  .pkg .glyph { font-size: 56px; line-height: 1; }
+  .pkg .name { font-family: var(--font-display); color: var(--saffron-yellow); font-size: 32px; text-shadow: 3px 3px 0 var(--lechon-brown); margin-top: 8px; line-height: 0.95; }
+  .pkg .tag { font-family: var(--font-script); color: var(--leaf-green); margin-top: 6px; font-size: 18px; font-weight: 600; }
+  .pkg .sub { color: var(--leaf-green); font-weight: 900; letter-spacing: 0.16em; font-size: 10px; margin-top: 6px; }
+  .pkg .footer { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 0; background: white; color: var(--saging-green); font-weight: 900; letter-spacing: 0.16em; font-size: 11px; }
+  .green { background: #1B4332; color: #FFFDF7; }
+  .green .name { color: #F4B942; }
+  .green::before { content: ""; position: absolute; top: -30px; right: -30px; width: 110px; height: 110px; border-radius: 50%; background: rgba(244,185,66,0.10); }
+  .green::after { content: ""; position: absolute; bottom: -20px; left: -20px; width: 70px; height: 70px; border-radius: 50%; background: rgba(82,183,136,0.18); }
+  .yellow { background: #F4B942; color: #1B4332; }
+  .yellow .name { color: #1B4332; text-shadow: 3px 3px 0 rgba(27,67,50,0.18); }
+  .yellow .tag { color: #1B4332; }
+  .yellow .sub { color: #1B4332; opacity: 0.7; }
+</style>
+</head>
+<body>
+  <div class="pkg green">
+    <div class="glyph">🥟</div>
+    <div class="name">MANG<br/>GUABAO</div>
+    <div class="sub">HAWAK ANG SARAP</div>
+    <div class="footer">BAO WRAPPER</div>
+  </div>
+  <div class="pkg yellow">
+    <div class="glyph">🧋</div>
+    <div class="name">MANG GUABAO</div>
+    <div class="sub">CALAMANSI LEMONADE</div>
+    <div class="footer">DRINK CUP</div>
+  </div>
+</body>
+</html>
