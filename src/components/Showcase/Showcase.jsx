@@ -207,8 +207,11 @@ function MenuScene() {
           <img
             key={enterKey}
             className={`sc-hero-card ${reduced ? "" : "is-entering"}`}
-            src={`/assets/guabaos/${current.key}.png`}
+            src={`/assets/guabaos/${current.key}-1200.webp`}
+            srcSet={`/assets/guabaos/${current.key}-600.webp 600w, /assets/guabaos/${current.key}-1200.webp 1200w`}
+            sizes="(max-width: 768px) 78vw, 520px"
             alt={current.name}
+            decoding="async"
           />
           {current.badge && (
             <div className={`sc-hero-badge ${badgeClass}`} aria-hidden="true">
@@ -246,7 +249,7 @@ function MenuScene() {
               aria-current={i === idx}
               role="tab"
             >
-              <img src={`/assets/guabaos/${b.key}.png`} alt="" />
+              <img src={`/assets/guabaos/${b.key}-600.webp`} alt="" loading="lazy" decoding="async" />
             </button>
           ))}
         </div>
@@ -308,21 +311,21 @@ function MascotScene() {
 const PACK_ITEMS = [
   {
     key: "bicol-guabao",
-    src: "/assets/guabaos/bicol.png",
+    base: "/assets/guabaos/bicol",
     label: "Bicol Express Guabao",
     sub: "The food",
     accent: "var(--leaf-green)",
   },
   {
     key: "calamansi",
-    src: "/assets/calamansi-cup.png",
+    base: "/assets/calamansi-cup",
     label: "Calamansi Lemonade",
     sub: "The drink",
     accent: "var(--saffron-yellow)",
   },
   {
     key: "kraft",
-    src: "/assets/craft-bag.png",
+    base: "/assets/craft-bag",
     label: "Takeout Kraft Bag",
     sub: "The bag",
     accent: "#C9A877",
@@ -393,7 +396,15 @@ function PackagingScene() {
             <figure key={item.key} className="sc-pack">
               <div className="sc-pack-halo" aria-hidden="true" />
               <PackSplash accent={item.accent} />
-              <img className="sc-pack-img" src={item.src} alt={item.label} />
+              <img
+                className="sc-pack-img"
+                src={`${item.base}-1200.webp`}
+                srcSet={`${item.base}-600.webp 600w, ${item.base}-1200.webp 1200w`}
+                sizes="(max-width: 900px) 65vw, 300px"
+                alt={item.label}
+                loading="lazy"
+                decoding="async"
+              />
               <figcaption className="sc-pack-figcap">
                 <span className="sub">{item.sub}</span>
                 <span className="lbl">{item.label}</span>
@@ -429,8 +440,12 @@ function KioskScene() {
           </div>
           <img
             className="sc-kiosk-img"
-            src="/assets/kiosk.png"
+            src="/assets/kiosk-1200.webp"
+            srcSet="/assets/kiosk-600.webp 600w, /assets/kiosk-1200.webp 1200w"
+            sizes="(max-width: 900px) 92vw, 920px"
             alt="Mang Guabao mall kiosk — saging-green and saffron, mascot wordmark, menu boards, display case"
+            loading="lazy"
+            decoding="async"
           />
         </div>
 
@@ -570,7 +585,7 @@ export function Showcase() {
   return (
     <div className="sc-root" ref={rootRef}>
       <div className="sc-topbar">
-        <a href="/">← Back to site</a>
+        <a href="/" className="sc-back-text">← Back to site</a>
         <div className="sc-mark">
           <img src="/assets/mascot-mang-g.svg" alt="" />
           MANG GUABAO

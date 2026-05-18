@@ -25,7 +25,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
   padding: 14px 18px;
   background: linear-gradient(to bottom, rgba(15,27,20,0.85), rgba(15,27,20,0));
   pointer-events: none;
@@ -46,6 +46,7 @@
   cursor: pointer;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  white-space: nowrap;
 }
 .sc-topbar .sc-classic-link {
   background: var(--saffron-yellow);
@@ -66,6 +67,17 @@
 }
 .sc-mark img { width: 28px; height: 28px; }
 
+/* Narrow phones — compress the topbar so all 3 chrome pills fit on one line */
+@media (max-width: 560px) {
+  .sc-topbar { padding: 10px 12px; gap: 6px; }
+  .sc-topbar a, .sc-topbar button { padding: 8px 10px; font-size: 12px; }
+  /* Hide the mascot wordmark on very narrow viewports — it's the easiest piece to drop */
+  .sc-mark { font-size: 14px; }
+  .sc-mark img { width: 22px; height: 22px; }
+  .sc-topbar a.sc-back-text { font-size: 0; }
+  .sc-topbar a.sc-back-text::before { content: "←"; font-size: 18px; font-family: var(--font-subhead); }
+}
+
 .sc-progress {
   position: fixed;
   bottom: 18px;
@@ -81,19 +93,29 @@
   -webkit-backdrop-filter: blur(8px);
 }
 .sc-progress button {
-  width: 10px;
-  height: 10px;
+  /* Visual dot stays 10px, but the hit-area is 28px so taps land reliably */
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 0;
-  background: rgba(255,253,247,0.25);
+  background: transparent;
   cursor: pointer;
   padding: 0;
+  position: relative;
+  transition: width 180ms ease;
+}
+.sc-progress button::after {
+  content: "";
+  position: absolute;
+  inset: 9px;             /* (28-10)/2 = 9px inset → visual dot is 10px */
+  border-radius: 999px;
+  background: rgba(255,253,247,0.25);
   transition: all 180ms ease;
 }
-.sc-progress button.active {
+.sc-progress button.active { width: 44px; }
+.sc-progress button.active::after {
+  inset: 9px 4px;
   background: var(--saffron-yellow);
-  width: 28px;
-  border-radius: 999px;
 }
 
 /* ---------- Scene base ---------- */
@@ -1901,11 +1923,11 @@
 .sc-carousel-scene .sc-section-head { margin: 0; }
 .sc-carousel-scene .sc-section-head h2 { font-size: clamp(26px, 3.2vw, 44px); margin-top: 4px; }
 
-/* Slim the controls so the thumbs row doesn't push the card off-screen */
+/* Controls — tap targets meet the WCAG ≥44px minimum on touch devices */
 .sc-hero-controls { margin-top: 4px; gap: 10px; }
-.sc-hero-nav { width: 38px; height: 38px; font-size: 16px; }
-.sc-hero-thumb { width: 38px; height: 38px; }
-.sc-hero-thumbs { gap: 6px; padding: 4px 8px; }
+.sc-hero-nav { width: 44px; height: 44px; font-size: 18px; }
+.sc-hero-thumb { width: 44px; height: 44px; }
+.sc-hero-thumbs { gap: 6px; padding: 5px 10px; }
 
 /* Tighten the card footer + image margins */
 .sc-hero-card-footer { margin-top: 0; gap: 12px; }
@@ -1916,6 +1938,13 @@
   .sc-hero-card { width: min(78vw, 380px); max-height: 46vh; }
   .sc-hero-product--card .sc-hero-badge { top: 0; right: 0; width: 70px; height: 70px; font-size: 10px; }
   .sc-carousel-scene { padding-top: 60px; }
-  .sc-hero-thumbs { gap: 6px; padding: 4px 8px; }
-  .sc-hero-thumb { width: 38px; height: 38px; }
+  .sc-hero-thumbs { gap: 6px; padding: 5px 10px; }
+  /* Thumbs stay 44px on mobile — required for tap accessibility */
+}
+@media (max-width: 560px) {
+  /* On narrow phones the prev/next + thumbs row is wider than the viewport,
+     forcing a 3-line wrap. Hide the chevrons — thumbs are tappable, and
+     ←/→ arrow keys still work on physical keyboards. */
+  .sc-hero-nav { display: none; }
+  .sc-hero-thumbs { width: 100%; justify-content: center; }
 }
