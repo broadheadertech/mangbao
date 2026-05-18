@@ -133,6 +133,22 @@
   transform-style: preserve-3d;
 }
 
+/* On phones, scroll-snap fights the content. Switch to a normal scrollable
+   page so tall scenes (Mascot 4 cards, Packaging 3 items, Voice 4 cards) can
+   grow past 100dvh without being clipped by the snap boundary. */
+@media (max-width: 900px) {
+  .sc-root { scroll-snap-type: none; }
+  .sc-scene {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+    scroll-snap-stop: normal;
+    /* Clear the fixed top bar so eyebrow text isn't covered */
+    padding-top: 76px;
+    padding-bottom: 32px;
+  }
+}
+
 .sc-scene--green { background: var(--saging-green); }
 .sc-scene--ink   { background: #0A1B14; }
 .sc-scene--yellow { background: var(--saffron-yellow); color: var(--saging-green); }
@@ -199,6 +215,14 @@
   background: linear-gradient(to bottom, var(--saffron-yellow), transparent);
   animation: sc-scroll 1.6s ease-in-out infinite;
 }
+
+/* Hide the SCROLL cue + scene-jump dots on phones — both are
+   position:fixed and overlap content when scenes grow past 100dvh.
+   On mobile the page scrolls naturally so neither is needed. */
+@media (max-width: 768px) {
+  .sc-scroll-cue { display: none; }
+  .sc-progress { display: none; }
+}
 @keyframes sc-scroll {
   0%   { transform: scaleY(0.2); transform-origin: top; opacity: 1; }
   60%  { transform: scaleY(1);   transform-origin: top; opacity: 1; }
@@ -220,13 +244,17 @@
 .sc-hero-copy { position: relative; z-index: 2; }
 .sc-hero-copy .display {
   font-family: var(--font-display);
-  font-size: clamp(72px, 11vw, 168px);
+  /* Floor lowered from 72 → 44 so "GUABAO" fits on 360-390px phones */
+  font-size: clamp(44px, 13vw, 168px);
   line-height: 0.92;
   letter-spacing: 0.02em;
   color: var(--saffron-yellow);
-  text-shadow: 8px 8px 0 var(--lechon-brown);
+  text-shadow: 6px 6px 0 var(--lechon-brown);
   text-transform: uppercase;
   margin: 0;
+  /* If the word is ever still too wide, scale it to fit — never clip */
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 .sc-hero-copy .display-2 { color: var(--bao-white); }
 .sc-hero-copy p {
@@ -1482,6 +1510,10 @@
     text-align: center;
     gap: 18px;
   }
+  /* Mascot first, copy second — brand reads before description */
+  .sc-hero-mascot { order: -1; }
+  .sc-hero-mascot img { max-width: 60vw; }
+  .sc-hero-copy { order: 1; }
   .sc-hero-copy p { margin-left: auto; margin-right: auto; }
   .sc-mascot-orbit {
     width: 88vw;
@@ -1496,8 +1528,8 @@
     gap: 32px;
     padding: 24px 0;
   }
-  .sc-pack { height: clamp(260px, 60vh, 320px); }
-  .sc-section-head { margin-top: 70px; }
+  .sc-pack { height: auto; }
+  .sc-section-head { margin-top: 0; }
 }
 
 @media (max-width: 600px) {
