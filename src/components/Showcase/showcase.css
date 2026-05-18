@@ -612,9 +612,25 @@
 /* ---------- Scene 3 — Mascot stage (static) ---------- */
 .sc-mascot-orbit {
   position: relative;
-  width: clamp(320px, 60vw, 640px);
-  height: clamp(320px, 60vw, 640px);
+  width: clamp(320px, 62vw, 680px);
+  height: clamp(320px, 62vw, 680px);
   perspective: 1400px;
+  isolation: isolate;
+}
+/* Soft saffron halo ring behind the mascot — like a spotlight */
+.sc-mascot-orbit::before {
+  content: "";
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244,185,66,0.28), rgba(82,183,136,0.10) 45%, transparent 75%);
+  filter: blur(40px);
+  z-index: 0;
+  animation: sc-halo-pulse 6s ease-in-out infinite;
+}
+@keyframes sc-halo-pulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.06); }
 }
 .sc-mascot-orbit .stage {
   position: absolute;
@@ -622,6 +638,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
   /* No spin. Cards stay upright and readable. */
 }
 .sc-mascot-orbit .center {
@@ -629,8 +646,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56%;
-  height: 56%;
+  width: 62%;
+  height: 62%;
   animation: sc-mascot-bob 5s ease-in-out infinite;
 }
 @keyframes sc-mascot-bob {
@@ -655,66 +672,111 @@
 }
 .sc-trait {
   position: absolute;
-  width: clamp(150px, 17vw, 210px);
-  padding: 14px 16px;
-  border-radius: 18px;
-  background: rgba(255,253,247,0.96);
-  color: var(--saging-green);
+  width: clamp(160px, 18vw, 220px);
+  padding: 14px 16px 14px 18px;
+  border-radius: 16px;
+  /* Glass morphism — saging-tinted translucent panel, subtle border */
+  background: linear-gradient(180deg, rgba(82,183,136,0.10), rgba(15,42,32,0.45));
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255,253,247,0.10);
+  color: var(--bao-white);
   text-align: left;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-  border-left: 4px solid var(--saffron-yellow);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,253,247,0.12);
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
-  transition: transform 240ms cubic-bezier(.2,.7,.2,1), box-shadow 240ms ease;
+  transition: transform 280ms cubic-bezier(.2,.7,.2,1),
+              box-shadow 280ms ease,
+              background 280ms ease,
+              border-color 280ms ease;
+  z-index: 2;
+}
+.sc-trait::before {
+  /* Per-trait accent dot in the top-left corner — small, modern, color-coded */
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent, var(--saffron-yellow));
+  box-shadow: 0 0 10px var(--accent, var(--saffron-yellow));
+  z-index: 1;
 }
 .sc-trait:hover {
-  transform: translateY(-4px) translateZ(20px);
-  box-shadow: 0 28px 50px rgba(0,0,0,0.45);
+  background: linear-gradient(180deg, rgba(82,183,136,0.16), rgba(15,42,32,0.60));
+  border-color: rgba(244,185,66,0.30);
+  box-shadow:
+    0 28px 56px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,253,247,0.18);
 }
-.sc-trait .glyph { font-size: 28px; line-height: 1; }
+.sc-trait .glyph {
+  font-size: 30px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
 .sc-trait .text { min-width: 0; }
 .sc-trait .title {
   font-family: var(--font-subhead);
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.1;
+  color: var(--bao-white);
 }
 .sc-trait .desc {
   font-weight: 700;
   font-size: 11px;
-  margin-top: 2px;
-  color: var(--fg-on-light-muted);
+  margin-top: 3px;
+  color: rgba(255,253,247,0.65);
   line-height: 1.4;
 }
 
-/* Fixed cardinal positions around the mascot — no JavaScript math needed */
-.sc-trait--top    { top:  6%;  left: 50%; transform: translate(-50%, 0); }
-.sc-trait--right  { top: 50%;  right: -6%;  transform: translateY(-50%); }
-.sc-trait--bottom { bottom: 6%; left: 50%; transform: translate(-50%, 0); }
-.sc-trait--left   { top: 50%;  left: -6%;   transform: translateY(-50%); }
-.sc-trait--top:hover    { transform: translate(-50%, -4px) translateZ(20px); }
-.sc-trait--bottom:hover { transform: translate(-50%, -4px) translateZ(20px); }
-.sc-trait--right:hover  { transform: translateY(calc(-50% - 4px)) translateZ(20px); }
-.sc-trait--left:hover   { transform: translateY(calc(-50% - 4px)) translateZ(20px); }
+/* Per-trait accent color — keyed by position class */
+.sc-trait--top    { --accent: var(--leaf-green); }
+.sc-trait--right  { --accent: var(--sili-red);   }
+.sc-trait--bottom { --accent: var(--saffron-yellow); }
+.sc-trait--left   { --accent: #C9A877;           }
+
+/* Fixed cardinal positions around the mascot — no JS math needed */
+.sc-trait--top    { top:  4%;  left: 50%; transform: translate(-50%, 0); }
+.sc-trait--right  { top: 50%;  right: -4%;  transform: translateY(-50%); }
+.sc-trait--bottom { bottom: 4%; left: 50%; transform: translate(-50%, 0); }
+.sc-trait--left   { top: 50%;  left: -4%;   transform: translateY(-50%); }
+.sc-trait--top:hover    { transform: translate(-50%, -6px); }
+.sc-trait--bottom:hover { transform: translate(-50%, -6px); }
+.sc-trait--right:hover  { transform: translateY(calc(-50% - 6px)); }
+.sc-trait--left:hover   { transform: translateY(calc(-50% - 6px)); }
 
 .sc-mascot-side {
   position: relative;
   z-index: 1;
   max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 .sc-mascot-side h2 {
   font-family: var(--font-subhead);
   font-size: clamp(40px, 5vw, 72px);
   line-height: 1.0;
-  color: var(--bao-white);
-  margin: 8px 0 14px;
+  /* Subtle saffron gradient text — modern accent without screaming color */
+  background: linear-gradient(180deg, var(--bao-white) 0%, var(--bao-white) 55%, var(--saffron-yellow) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  margin: 4px 0 0;
 }
 .sc-mascot-side p {
   font-weight: 700;
   color: rgba(255,253,247,0.78);
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.6;
+  max-width: 420px;
 }
 
 /* ---------- Scene 4 — Packaging (image-based with splash effect) ---------- */
@@ -921,6 +983,229 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sc-kiosk-img { animation: none !important; }
+}
+
+/* ============================================================
+   Scene 3 — Mascot, modern redesign
+   Layered "MANG G" Bebas text background + big mascot in front +
+   4 trait cards in a horizontal row at the bottom.
+   ============================================================ */
+.sc-mascot-scene { padding: 0; }
+.sc-mascot-scene .sc-mascot-orbit,
+.sc-mascot-scene .sc-mascot-side { display: none; }   /* hide legacy orbit layout */
+
+.sc-mascot-frame {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  padding: clamp(56px, 7vh, 88px) clamp(20px, 4vw, 56px) clamp(24px, 4vh, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 2vh, 22px);
+  isolation: isolate;
+}
+
+/* Top bar — eyebrow on the left, pill chip on the right */
+.sc-mascot-topbar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.sc-mascot-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255,253,247,0.08);
+  border: 1px solid rgba(255,253,247,0.14);
+  color: var(--bao-white);
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Hero — big layered text + mascot in front */
+.sc-mascot-hero {
+  position: relative;
+  flex: 1;
+  min-height: clamp(280px, 42vh, 460px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.sc-mascot-bg-stack {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+}
+.sc-mascot-bg-stack span {
+  font-family: var(--font-display);
+  font-size: clamp(80px, 13vw, 200px);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  margin: -4px 0;
+  user-select: none;
+}
+.sc-mascot-bg-stack .solid {
+  color: var(--bao-white);
+  -webkit-text-stroke: 0;
+  z-index: 1;
+}
+.sc-mascot-bg-stack .outline {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255,253,247,0.30);
+  text-stroke: 2px rgba(255,253,247,0.30);
+}
+.sc-mascot-bg-stack .outline.faint    { -webkit-text-stroke-color: rgba(255,253,247,0.18); text-stroke-color: rgba(255,253,247,0.18); }
+.sc-mascot-bg-stack .outline.faintest { -webkit-text-stroke-color: rgba(255,253,247,0.08); text-stroke-color: rgba(255,253,247,0.08); }
+
+.sc-mascot-figure {
+  position: relative;
+  z-index: 2;
+  width: clamp(220px, 32vw, 420px);
+  height: auto;
+  filter: drop-shadow(0 30px 36px rgba(0,0,0,0.55));
+  animation: sc-mascot-bob 5s ease-in-out infinite;
+  /* Sit slightly right-of-center so the layered MANG G text reads on the left */
+  transform: translateX(8%);
+}
+
+/* Bottom-right pill chip showing the entry-price */
+.sc-mascot-priced {
+  position: absolute;
+  right: 0;
+  bottom: 6%;
+  z-index: 3;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: rgba(244,185,66,0.14);
+  border: 1px solid rgba(244,185,66,0.40);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--bao-white);
+}
+.sc-mascot-priced .from {
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,253,247,0.65);
+}
+.sc-mascot-priced .price {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--saffron-yellow);
+  letter-spacing: 0.02em;
+}
+
+/* Horizontal row of 4 trait cards beneath the hero */
+.sc-mascot-traits-row {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px, 1.2vw, 14px);
+  margin-top: auto;
+}
+.sc-trait-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(82,183,136,0.10), rgba(15,42,32,0.50));
+  border: 1px solid rgba(255,253,247,0.10);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  color: var(--bao-white);
+  transition: transform 240ms cubic-bezier(.2,.7,.2,1),
+              border-color 240ms ease,
+              background 240ms ease;
+  isolation: isolate;
+  overflow: hidden;
+}
+.sc-trait-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(244,185,66,0.40);
+  background: linear-gradient(180deg, rgba(82,183,136,0.18), rgba(15,42,32,0.65));
+}
+/* Per-trait accent dot (small "status light" UI tic) */
+.sc-trait-card__dot {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent, var(--saffron-yellow));
+  box-shadow: 0 0 10px var(--accent, var(--saffron-yellow));
+}
+.sc-trait-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sc-trait-card__glyph {
+  font-size: 22px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+}
+.sc-trait-card__title {
+  font-family: var(--font-subhead);
+  font-size: clamp(14px, 1.3vw, 17px);
+  color: var(--bao-white);
+}
+.sc-trait-card__desc {
+  margin: 0;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.4;
+  color: rgba(255,253,247,0.65);
+}
+
+.sc-trait-card--top    { --accent: var(--leaf-green);     }
+.sc-trait-card--right  { --accent: var(--sili-red);       }
+.sc-trait-card--bottom { --accent: var(--saffron-yellow); }
+.sc-trait-card--left   { --accent: #C9A877;               }
+
+/* Responsive — stack to 2x2 on tablet, 1-col on small phones */
+@media (max-width: 900px) {
+  .sc-mascot-frame { padding-top: 56px; gap: 14px; }
+  .sc-mascot-bg-stack span { font-size: clamp(64px, 18vw, 120px); }
+  .sc-mascot-figure { width: min(60vw, 280px); transform: none; }
+  .sc-mascot-priced { bottom: 0; padding: 8px 16px; }
+  .sc-mascot-priced .price { font-size: 18px; }
+  .sc-mascot-traits-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .sc-mascot-traits-row { grid-template-columns: 1fr; }
+  .sc-trait-card__desc { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-mascot-figure { animation: none !important; }
 }
 
 /* Bao wrapper */

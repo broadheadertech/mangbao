@@ -263,32 +263,37 @@ function MenuScene() {
 /* ============================================================ */
 function MascotScene() {
   return (
-    <section className="sc-scene sc-scene--ink" id="mascot">
-      <div className="sc-stage" style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 48, alignItems: "center" }}>
-        <div className="sc-mascot-orbit">
-          <div className="stage">
-            <div className="center" aria-hidden="true">
-              <img src="/assets/mascot-mang-g.svg" alt="" />
-            </div>
-            {TRAITS.map((t) => (
-              <div key={t.title} className={`sc-trait sc-trait--${t.position}`}>
-                <div className="glyph" aria-hidden="true">{t.glyph}</div>
-                <div className="text">
-                  <div className="title">{t.title}</div>
-                  <div className="desc">{t.desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
+    <section className="sc-scene sc-scene--ink sc-mascot-scene" id="mascot">
+      <div className="sc-mascot-frame">
+        {/* Top bar — eyebrow on the left, tagline pill on the right */}
+        <div className="sc-mascot-topbar">
+          <div className="sc-eyebrow">03 — Brand Mascot</div>
+          <span className="sc-mascot-pill">Filipino fusion bao</span>
         </div>
 
-        <div className="sc-mascot-side">
-          <div className="sc-eyebrow">03 — Brand Mascot</div>
-          <h2>Meet Mang G</h2>
-          <p>
-            Half-lolo, half-product, all heart. Salakot for local pride, bao body for warmth, mustache
-            for Mang energy, and chopsticks for the fusion at the core.
-          </p>
+        {/* Hero area — layered MANG G text + mascot floating over it */}
+        <div className="sc-mascot-hero">
+          <div className="sc-mascot-bg-stack" aria-hidden="true">
+            <span className="solid">MANG G</span>
+            <span className="outline">MANG G</span>
+            <span className="outline faint">MANG G</span>
+            <span className="outline faintest">MANG G</span>
+          </div>
+          <img className="sc-mascot-figure" src="/assets/mascot-mang-g.svg" alt="Mang G — smiling bao with salakot, mustache, and chopsticks" />
+        </div>
+
+        {/* Row of 4 trait cards beneath */}
+        <div className="sc-mascot-traits-row">
+          {TRAITS.map((t) => (
+            <article key={t.title} className={`sc-trait-card sc-trait-card--${t.position}`}>
+              <span className="sc-trait-card__dot" aria-hidden="true" />
+              <div className="sc-trait-card__head">
+                <span className="sc-trait-card__glyph" aria-hidden="true">{t.glyph}</span>
+                <span className="sc-trait-card__title">{t.title}</span>
+              </div>
+              <p className="sc-trait-card__desc">{t.desc}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
