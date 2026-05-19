@@ -235,7 +235,7 @@ function MenuScene() {
               <span className="currency">₱</span>{current.price}
             </span>
           </div>
-          <a className="sc-hero-cta" href="/#menu">🛍️ Order {current.name}</a>
+          <a className="sc-hero-cta" href="/site#menu">🛍️ Order {current.name}</a>
         </div>
       </div>
 
@@ -509,8 +509,8 @@ function CtaScene() {
         <div className="sc-neon">Hawak ang Sarap ✦</div>
         <div className="sc-neon-sub">MANG GUABAO · FILIPINO FUSION BAO</div>
         <div className="sc-cta-buttons">
-          <a href="/#menu">🥟 Order Now</a>
-          <a href="/#locations" className="secondary">Find a Store</a>
+          <a href="/site#menu">🥟 Order Now</a>
+          <a href="/site#locations" className="secondary">Find a Store</a>
           <a href="/presentation/classic" className="secondary">View Classic Deck</a>
         </div>
         <div style={{ marginTop: 22, fontWeight: 700, fontSize: 12, letterSpacing: "0.22em", color: "rgba(255,253,247,0.45)", textTransform: "uppercase" }}>
@@ -598,7 +598,7 @@ export function Showcase() {
   return (
     <div className="sc-root" ref={rootRef}>
       <div className="sc-topbar">
-        <a href="/" className="sc-back-text">← Back to site</a>
+        <a href="/site" className="sc-back-text">← Visit the site</a>
         <div className="sc-mark">
           <img src="/assets/mascot-300.webp" alt="" decoding="async" />
           MANG GUABAO

@@ -9,8 +9,9 @@ import { Showcase } from "./components/Showcase/Showcase.jsx";
 function Router() {
   const path = window.location.pathname.replace(/\/$/, "");
   if (path === "/presentation/classic") return <Presentation />;
-  if (path === "/presentation") return <Showcase />;
-  return <App />;
+  if (path === "/site") return <App />;
+  // Showcase is the default landing experience at "/" and "/presentation"
+  return <Showcase />;
 }
 
 createRoot(document.getElementById("root")).render(

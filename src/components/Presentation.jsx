@@ -60,7 +60,7 @@ export function Presentation() {
             fontSize: 15,
           }}
         >
-          ← Back to site
+          ← Showcase
         </a>
 
         <div
