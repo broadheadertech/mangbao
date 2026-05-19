@@ -48,7 +48,7 @@ export function Header({ cartCount = 0, onOpenCart }) {
             minWidth: 0,
           }}
         >
-          <img src="/assets/mascot-mang-g.svg" alt="" width={isMobile ? 40 : 48} height={isMobile ? 40 : 48} />
+          <img src="/assets/mascot-300.webp" alt="" width={isMobile ? 40 : 48} height={isMobile ? 40 : 48} decoding="async" />
           <div style={{ lineHeight: 1 }}>
             <div
               style={{

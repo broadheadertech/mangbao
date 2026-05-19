@@ -39,8 +39,11 @@ export function Hero() {
               }}
             />
             <img
-              src="/assets/mascot-mang-g.svg"
+              src="/assets/mascot-800.webp"
+              srcSet="/assets/mascot-300.webp 300w, /assets/mascot-800.webp 800w"
+              sizes="(max-width: 720px) 65vw, 220px"
               alt="Mang G"
+              decoding="async"
               style={{ position: "relative", width: 220, maxWidth: "70%" }}
             />
           </div>
@@ -121,8 +124,11 @@ export function Hero() {
               }}
             />
             <img
-              src="/assets/mascot-mang-g.svg"
+              src="/assets/mascot-800.webp"
+              srcSet="/assets/mascot-300.webp 300w, /assets/mascot-800.webp 800w"
+              sizes="(min-width: 1024px) 380px, 50vw"
               alt="Mang G"
+              decoding="async"
               style={{ position: "relative", width: 380, maxWidth: "100%" }}
             />
             <div

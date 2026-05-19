@@ -70,7 +70,7 @@ export function Footer() {
           }}
         >
           <div>
-            <img src="/assets/mascot-mang-g.svg" width="64" height="64" alt="" />
+            <img src="/assets/mascot-300.webp" width="64" height="64" alt="" decoding="async" />
             <div
               style={{
                 marginTop: 8,

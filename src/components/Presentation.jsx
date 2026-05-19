@@ -71,7 +71,7 @@ export function Presentation() {
             minWidth: 0,
           }}
         >
-          <img src="/assets/mascot-mang-g.svg" alt="" width={28} height={28} />
+          <img src="/assets/mascot-300.webp" alt="" width={28} height={28} decoding="async" />
           <div
             style={{
               fontFamily: "var(--font-display)",

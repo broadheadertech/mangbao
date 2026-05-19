@@ -57,8 +57,11 @@ export function MascotSection() {
             }}
           />
           <img
-            src="/assets/mascot-mang-g.svg"
+            src="/assets/mascot-800.webp"
+            srcSet="/assets/mascot-300.webp 300w, /assets/mascot-800.webp 800w"
+            sizes={isMobile ? "65vw" : "360px"}
             alt="Mang G"
+            decoding="async"
             style={{
               position: "relative",
               width: isMobile ? 220 : 360,

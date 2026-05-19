@@ -76,7 +76,13 @@ function HeroScene({ stageRef, onMouse }) {
           </div>
           <div className="sc-hero-mascot">
             <div className="glow" />
-            <img src="/assets/mascot-mang-g.svg" alt="Mang G" />
+            <img
+              src="/assets/mascot-800.webp"
+              srcSet="/assets/mascot-300.webp 300w, /assets/mascot-800.webp 800w"
+              sizes="(max-width: 768px) 60vw, 380px"
+              alt="Mang G"
+              decoding="async"
+            />
           </div>
         </div>
       </div>
@@ -282,7 +288,14 @@ function MascotScene() {
             <span className="outline faint">MANG G</span>
             <span className="outline faintest">MANG G</span>
           </div>
-          <img className="sc-mascot-figure" src="/assets/mascot-mang-g.svg" alt="Mang G — smiling bao with salakot, mustache, and chopsticks" />
+          <img
+            className="sc-mascot-figure"
+            src="/assets/mascot-800.webp"
+            srcSet="/assets/mascot-300.webp 300w, /assets/mascot-800.webp 800w"
+            sizes="(max-width: 768px) 60vw, 420px"
+            alt="Mang G — smiling bao with salakot, mustache, glasses and chopsticks"
+            decoding="async"
+          />
         </div>
 
         {/* Row of 4 trait cards beneath */}
@@ -587,7 +600,7 @@ export function Showcase() {
       <div className="sc-topbar">
         <a href="/" className="sc-back-text">← Back to site</a>
         <div className="sc-mark">
-          <img src="/assets/mascot-mang-g.svg" alt="" />
+          <img src="/assets/mascot-300.webp" alt="" decoding="async" />
           MANG GUABAO
         </div>
         <a href="/presentation/classic" className="sc-classic-link">Classic deck →</a>
