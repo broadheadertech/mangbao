@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulse Fusion Republic — Brand Identity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #CE1126;
+    --red-deep: #8B0A1F;
+    --red-ember: #E63946;
+    --cream: #F4ECDC;
+    --cream-warm: #EFE4CE;
+    --charcoal: #161210;
+    --ink: #2B2522;
+    --gold: #D4A24C;
+    --ube: #6B4E8E;
+    --rule: rgba(22, 18, 16, 0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Geist', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Reusable ---------- */
+  .display {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 0;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 0.88;
+  }
+
+  .editorial {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .mono {
+    font-family: 'Geist Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+
+  .label {
+    font-family: 'Geist Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+
+  section {
+    padding: 7vh 6vw;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .section-num {
+    position: absolute;
+    top: 3vh;
+    left: 6vw;
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+  }
+
+  .section-num::after {
+    content: '';
+    width: 80px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.4;
+  }
+
+  /* ---------- TOP BAR ---------- */
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: difference;
+    color: var(--cream);
+    pointer-events: none;
+  }
+
+  .topbar .mark { font-weight: 600; letter-spacing: 0.08em; }
+  .topbar .meta { display: flex; gap: 2rem; }
+
+  /* ---------- 01: COVER ---------- */
+  .cover {
+    background: var(--red);
+    color: var(--cream);
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .cover-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    padding: 0 4vw;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Massive edition number behind type */
+  .cover-bignum {
+    position: absolute;
+    top: 50%;
+    right: -4vw;
+    transform: translateY(-50%);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 200;
+    font-size: clamp(20rem, 50vw, 60rem);
+    line-height: 0.8;
+    color: var(--red-deep);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 1;
+    letter-spacing: -0.06em;
+  }
+
+  .cover-title {
+    line-height: 0.82;
+    position: relative;
+    z-index: 3;
+    margin: 0;
+  }
+
+  .cover-title .lineA,
+  .cover-title .lineB {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144;
+    font-weight: 800;
+    font-size: clamp(5rem, 22vw, 26rem);
+    line-height: 0.82;
+    letter-spacing: -0.055em;
+    text-transform: none;
+  }
+
+  .cover-title .lineB {
+    font-style: italic;
+    font-weight: 400;
+    margin-top: -0.04em;
+  }
+
+  .cover-title .lineC {
+    display: inline-block;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.4rem, 3.2vw, 3.2rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    margin-top: 1.2vh;
+    padding-left: 0.5vw;
+    opacity: 0.92;
+  }
+
+  .cover-title .lineC::before {
+    content: '— ';
+    opacity: 0.7;
+  }
+
+  .cover-hero-tag {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.4rem, 2.4vw, 2.4rem);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin-top: 3.5vh;
+    color: var(--cream);
+    position: relative;
+    z-index: 3;
+    max-width: 24ch;
+  }
+
+  .cover-hero-tag em {
+    font-style: italic;
+    color: var(--cream);
+    opacity: 0.78;
+  }
+
+  .cover-meta {
+    position: absolute;
+    bottom: 4vh;
+    left: 0;
+    right: 0;
+    padding: 0 4vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: var(--cream);
+    z-index: 3;
+  }
+
+  .cover-meta .tagline {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(0.95rem, 1.2vw, 1.2rem);
+    max-width: 26ch;
+    line-height: 1.3;
+  }
+
+  /* Top tape — editorial header bar */
+  .cover-tape {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    padding: 1.4rem 4vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(244, 236, 220, 0.25);
+    z-index: 3;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .cover-tape span { display: inline-flex; align-items: center; gap: 0.7rem; }
+
+  .pulse-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--cream);
+    display: inline-block;
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 var(--cream); }
+    50% { transform: scale(1.4); opacity: 0.5; box-shadow: 0 0 0 8px rgba(244, 236, 220, 0); }
+  }
+
+  /* 8-rayed sun (flag reference) — bold, large */
+  .cover-sun {
+    position: absolute;
+    top: -8vw;
+    right: -8vw;
+    width: 32vw;
+    height: 32vw;
+    z-index: 1;
+    opacity: 0.18;
+    animation: spin 60s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* ECG line — full bleed, dramatic */
+  .ecg {
+    position: absolute;
+    bottom: 18vh;
+    left: 0;
+    right: 0;
+    height: 80px;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Remove the old corner motif */
+  .cover::before { display: none; }
+
+  /* ---------- 02: MANIFESTO ---------- */
+  .manifesto {
+    background: var(--cream);
+    color: var(--charcoal);
+  }
+
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 5vw;
+    align-items: start;
+    margin-top: 4vh;
+  }
+
+  .manifesto h2 {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 5.5vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+
+  .manifesto h2 em {
+    font-style: italic;
+    color: var(--red);
+    font-weight: 300;
+  }
+
+  .manifesto-body p {
+    font-size: clamp(1rem, 1.15vw, 1.18rem);
+    line-height: 1.55;
+    margin-bottom: 1.4rem;
+    max-width: 52ch;
+  }
+
+  .manifesto-body p:first-child::first-letter {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 4.6rem;
+    float: left;
+    line-height: 0.85;
+    padding: 0.4rem 0.6rem 0 0;
+    color: var(--red);
+  }
+
+  /* ---------- 03: CONCEPT / HEARTBEAT ---------- */
+  .concept {
+    background: var(--charcoal);
+    color: var(--cream);
+    overflow: hidden;
+  }
+
+  .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4vw;
+    align-items: center;
+  }
+
+  .concept-pull {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2rem, 4.2vw, 4.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+
+  .concept-pull em {
+    font-style: italic;
+    color: var(--red-ember);
+  }
+
+  .concept-list {
+    list-style: none;
+    border-top: 1px solid rgba(244, 236, 220, 0.15);
+  }
+
+  .concept-list li {
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(244, 236, 220, 0.15);
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.2rem;
+    align-items: baseline;
+  }
+
+  .concept-list .idx {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.72rem;
+    opacity: 0.55;
+    letter-spacing: 0.12em;
+  }
+
+  .concept-list .what {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    line-height: 1.25;
+    font-weight: 400;
+  }
+
+  .concept-list .what em {
+    color: var(--red-ember);
+    font-style: italic;
+  }
+
+  /* ---------- 04: PALETTE ---------- */
+  .palette { background: var(--cream); }
+
+  .palette-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    margin-bottom: 4vh;
+  }
+
+  .palette-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.4rem, 6vw, 6.5rem);
+    font-weight: 500;
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+  }
+
+  .palette-header h2 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--red);
+  }
+
+  .palette-header p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    max-width: 38ch;
+    justify-self: end;
+  }
+
+  .swatches {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 2px;
+    height: 58vh;
+  }
+
+  .swatch {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .swatch .name {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.2rem, 1.8vw, 1.9rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+
+  .swatch .desc {
+    font-family: 'Instrument Serif', serif;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    opacity: 0.85;
+    margin-top: 0.5rem;
+  }
+
+  .swatch .hex {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+  }
+
+  .sw-red { background: var(--red); color: var(--cream); }
+  .sw-cream { background: var(--cream-warm); color: var(--charcoal); border: 1px solid var(--rule); }
+  .sw-charcoal { background: var(--charcoal); color: var(--cream); }
+  .sw-gold { background: var(--gold); color: var(--charcoal); }
+  .sw-ube { background: var(--ube); color: var(--cream); }
+
+  /* ---------- 05: TYPOGRAPHY ---------- */
+  .typography {
+    background: var(--cream);
+    border-top: 1px solid var(--rule);
+  }
+
+  .type-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6vh;
+    margin-top: 4vh;
+  }
+
+  .type-block {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 4vw;
+    align-items: start;
+    border-top: 1px solid var(--rule);
+    padding-top: 2.5vh;
+  }
+
+  .type-block .meta-col p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-top: 0.6rem;
+    max-width: 32ch;
+  }
+
+  .type-specimen-display {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144;
+    font-weight: 600;
+    font-size: clamp(3rem, 8vw, 9rem);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+  }
+
+  .type-specimen-display em { font-style: italic; font-weight: 300; color: var(--red); }
+
+  .type-specimen-editorial {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2rem, 4.5vw, 4.8rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .type-specimen-editorial em { font-style: italic; }
+
+  .type-specimen-body {
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(1.05rem, 1.4vw, 1.45rem);
+    line-height: 1.5;
+    max-width: 56ch;
+  }
+
+  .type-aaz {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    margin-top: 1rem;
+    opacity: 0.6;
+  }
+
+  /* ---------- 06: VISUAL DIRECTION ---------- */
+  .visual {
+    background: var(--charcoal);
+    color: var(--cream);
+  }
+
+  .visual h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.4rem, 6vw, 6.5rem);
+    font-weight: 500;
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    margin-bottom: 5vh;
+    max-width: 16ch;
+  }
+
+  .visual h2 em { font-style: italic; color: var(--red-ember); font-weight: 300; }
+
+  .visual-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .v-card {
+    padding: 2rem;
+    background: rgba(244, 236, 220, 0.04);
+    border: 1px solid rgba(244, 236, 220, 0.08);
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .v-card .num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    opacity: 0.55;
+  }
+
+  .v-card .title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-top: auto;
+  }
+
+  .v-card .title em { font-style: italic; color: var(--red-ember); }
+
+  .v-card .desc {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    opacity: 0.75;
+    margin-top: 0.8rem;
+  }
+
+  .v-card.avoid {
+    background: var(--red-deep);
+    border-color: var(--red);
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .v-card.avoid .title { margin: 0; color: var(--cream); }
+  .v-card.avoid .desc { opacity: 0.9; color: var(--cream); }
+
+  /* ---------- 07: TONE OF VOICE ---------- */
+  .tone {
+    background: var(--cream);
+    overflow: hidden;
+  }
+
+  .tone-quote {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.4rem, 6vw, 6.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    max-width: 22ch;
+    margin: 4vh 0;
+  }
+
+  .tone-quote em { font-style: italic; color: var(--red); }
+
+  .tone-quote::before {
+    content: '“';
+    font-family: 'Fraunces', serif;
+    font-size: clamp(6rem, 14vw, 14rem);
+    color: var(--red);
+    line-height: 0.6;
+    display: block;
+    margin-bottom: -0.5rem;
+  }
+
+  .tone-attribute {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 3vh;
+  }
+
+  .tone-pill {
+    border: 1px solid var(--charcoal);
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .tone-pill.filled {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--cream);
+  }
+
+  /* ---------- 08: PERSONALITY ---------- */
+  .personality {
+    background: var(--red);
+    color: var(--cream);
+    overflow: hidden;
+  }
+
+  .personality-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5vw;
+    align-items: center;
+  }
+
+  .personality h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.4rem, 6vw, 6.5rem);
+    font-weight: 500;
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+  }
+
+  .personality h2 em { font-style: italic; font-weight: 300; }
+
+  .personality-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.3rem, 1.8vw, 1.85rem);
+    line-height: 1.3;
+    max-width: 38ch;
+  }
+
+  .personality-attrs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    margin-top: 4vh;
+    background: rgba(244, 236, 220, 0.2);
+    border: 1px solid rgba(244, 236, 220, 0.2);
+  }
+
+  .pa {
+    padding: 1.5rem;
+    background: var(--red);
+  }
+
+  .pa .from {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    opacity: 0.7;
+    text-transform: uppercase;
+  }
+
+  .pa .word {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-top: 0.3rem;
+  }
+
+  /* ---------- 09: MOOD WORDS / MARQUEE ---------- */
+  .mood {
+    background: var(--cream);
+    padding: 4vh 0;
+    min-height: 40vh;
+    overflow: hidden;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .mood-label {
+    padding: 0 6vw;
+    margin-bottom: 3vh;
+  }
+
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .marquee-track {
+    display: inline-flex;
+    animation: scroll 28s linear infinite;
+    gap: 3vw;
+    padding-right: 3vw;
+  }
+
+  .marquee-track span {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3rem, 8vw, 9rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    flex-shrink: 0;
+  }
+
+  .marquee-track span:nth-child(2n) {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--red);
+  }
+
+  .marquee-track .dot {
+    color: var(--red);
+    font-family: 'Geist', sans-serif;
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .marquee.reverse .marquee-track {
+    animation-direction: reverse;
+    animation-duration: 34s;
+  }
+
+  /* ---------- 10: TAGLINES ---------- */
+  .taglines {
+    background: var(--cream);
+    border-top: 1px solid var(--rule);
+  }
+
+  .taglines-list {
+    list-style: none;
+    margin-top: 4vh;
+  }
+
+  .taglines-list li {
+    padding: 2.5vh 0;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 80px 1fr 100px;
+    align-items: baseline;
+    gap: 2rem;
+    transition: padding-left 0.4s ease;
+    cursor: default;
+  }
+
+  .taglines-list li:hover {
+    padding-left: 1rem;
+    background: var(--red);
+    color: var(--cream);
+  }
+
+  .taglines-list li:hover .tag-text em { color: var(--cream); }
+  .taglines-list li:hover .tag-num { color: var(--cream); opacity: 1; }
+
+  .taglines-list li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .tag-num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+  }
+
+  .tag-text {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4.8vw, 5rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  .tag-text em { font-style: italic; color: var(--red); font-weight: 400; }
+
+  .tag-lang {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    text-align: right;
+  }
+
+  /* ---------- 11: SIGNOFF ---------- */
+  .signoff {
+    background: var(--charcoal);
+    color: var(--cream);
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .signoff h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(4rem, 14vw, 14rem);
+    font-weight: 600;
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+  }
+
+  .signoff h2 em { font-style: italic; font-weight: 300; color: var(--red-ember); }
+
+  .signoff-footer {
+    position: absolute;
+    bottom: 4vh;
+    left: 6vw;
+    right: 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 820px) {
+    .manifesto-grid,
+    .concept-grid,
+    .personality-grid,
+    .palette-header { grid-template-columns: 1fr; gap: 3vh; }
+    .palette-header p { justify-self: start; }
+    .swatches { grid-template-columns: 1fr; height: auto; }
+    .swatch { min-height: 160px; }
+    .visual-grid { grid-template-columns: 1fr; }
+    .v-card.avoid { grid-column: span 1; grid-template-columns: 1fr; }
+    .type-block { grid-template-columns: 1fr; gap: 2vh; }
+    .taglines-list li { grid-template-columns: 50px 1fr; }
+    .tag-lang { display: none; }
+    .personality-attrs { grid-template-columns: 1fr; }
+    .cover-meta { flex-direction: column; gap: 2rem; align-items: flex-start; }
+    .topbar { display: none; }
+    .section-num { position: static; margin-bottom: 2vh; }
+  }
+
+  /* ===== Mang Guabao Showcase — sister concept section ===== */
+  :root {
+    --mg-saging: #1B4332;
+    --mg-saging-deep: #0F2A20;
+    --mg-saffron: #F4B942;
+    --mg-leaf: #52B788;
+    --mg-sili: #C1121F;
+    --mg-bao: #FFFDF7;
+    --mg-lechon: #6B3A2A;
+  }
+  .mang-showcase {
+    background: var(--mg-saging);
+    color: var(--mg-bao);
+    background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.03) 0 2px, transparent 2px 28px);
+    overflow: hidden;
+  }
+  .mang-showcase .section-num { color: var(--mg-saffron); opacity: 0.85; }
+  .mang-header { max-width: 900px; margin-bottom: 6vh; }
+  .mang-header h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--mg-bao);
+    margin-bottom: 2vh;
+  }
+  .mang-header h2 em {
+    font-style: italic;
+    color: var(--mg-saffron);
+    font-family: 'Instrument Serif', serif;
+  }
+  .mang-header p {
+    max-width: 600px;
+    color: rgba(255,253,247,0.78);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  .mang-stage {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 6vw;
+    align-items: center;
+    margin-bottom: 6vh;
+  }
+  .mang-mascot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2vh 0;
+  }
+  .mang-mascot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(244,185,66,0.20), transparent 60%);
+    filter: blur(40px);
+  }
+  .mang-mascot img {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    filter: drop-shadow(0 30px 36px rgba(0,0,0,0.5));
+  }
+  .mang-meta { display: flex; flex-direction: column; gap: 3vh; }
+  .mang-palette {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .mang-palette .m-swatch {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,253,247,0.12);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  .mang-palette .m-swatch::after {
+    content: attr(data-name);
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,253,247,0.55);
+  }
+  .mang-tag {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+    color: var(--mg-leaf);
+    line-height: 1.1;
+  }
+  .mang-meta p {
+    color: rgba(255,253,247,0.78);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 460px;
+  }
+  .mang-menu {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.2rem;
+    margin-bottom: 5vh;
+  }
+  .mang-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 0.6rem;
+    border: 1px solid rgba(255,253,247,0.10);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(82,183,136,0.06), rgba(15,42,32,0.40));
+    transition: transform 200ms ease, border-color 200ms ease, background 200ms ease;
+  }
+  .mang-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(244,185,66,0.35);
+    background: linear-gradient(180deg, rgba(82,183,136,0.12), rgba(15,42,32,0.55));
+  }
+  .mang-item img {
+    width: 100%;
+    max-width: 110px;
+    height: auto;
+    object-fit: contain;
+  }
+  .mang-item .label {
+    color: var(--mg-bao);
+    opacity: 0.78;
+    font-size: 0.6rem;
+  }
+  .mang-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.6rem;
+    border-radius: 999px;
+    background: var(--mg-saffron);
+    color: var(--mg-saging);
+    text-decoration: none;
+    font-family: 'Geist', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 0 var(--mg-lechon);
+    transition: transform 180ms cubic-bezier(.2,.7,.2,1), box-shadow 180ms ease;
+  }
+  .mang-cta:hover { transform: translateY(-2px); }
+  .mang-cta:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--mg-lechon); }
+  .mang-cta-arrow { font-size: 1.1rem; }
+
+  @media (max-width: 800px) {
+    .mang-stage { grid-template-columns: 1fr; gap: 3vh; }
+    .mang-mascot img { max-width: 60vw; }
+    .mang-menu { grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+    .mang-palette .m-swatch { width: 44px; height: 44px; }
+  }
+  @media (max-width: 480px) {
+    .mang-menu { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ===== Boleros Meatballs Showcase — sister concept #2 ===== */
+  :root {
+    --bo-red: #D8262D;
+    --bo-red-deep: #7A0A12;
+    --bo-orange: #F08020;
+    --bo-yellow: #F5B82E;
+    --bo-yellow-light: #FFD566;
+    --bo-cream: #FBE9C4;
+    --bo-brown: #6B2E14;
+    --bo-brown-deep: #3A170B;
+    --bo-char: #1A0F0A;
+  }
+  .bolero-showcase {
+    background: var(--bo-red-deep);
+    background-image:
+      radial-gradient(ellipse at 80% 0%, rgba(245,184,46,0.12), transparent 50%),
+      radial-gradient(ellipse at 0% 100%, rgba(240,128,32,0.10), transparent 55%);
+    color: var(--bo-cream);
+    overflow: hidden;
+  }
+  .bolero-showcase .section-num { color: var(--bo-yellow); opacity: 0.85; }
+  .bolero-header { max-width: 900px; margin-bottom: 6vh; }
+  .bolero-header h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--bo-cream);
+    margin-bottom: 2vh;
+  }
+  .bolero-header h2 em {
+    font-style: italic;
+    color: var(--bo-yellow);
+    font-family: 'Instrument Serif', serif;
+  }
+  .bolero-header p {
+    max-width: 600px;
+    color: rgba(251,233,196,0.78);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  .bolero-stage {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 6vw;
+    align-items: center;
+    margin-bottom: 6vh;
+  }
+  .bolero-art {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2vh 0;
+  }
+  .bolero-art::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(245,184,46,0.22), transparent 60%);
+    filter: blur(40px);
+  }
+  .bolero-art svg {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    filter: drop-shadow(0 30px 36px rgba(0,0,0,0.55));
+  }
+  .bolero-meta { display: flex; flex-direction: column; gap: 3vh; }
+  .bolero-tag {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+    color: var(--bo-yellow);
+    line-height: 1.1;
+  }
+  .bolero-meta p {
+    color: rgba(251,233,196,0.78);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 460px;
+  }
+  .bolero-palette {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .bolero-palette .b-swatch {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    border: 1px solid rgba(251,233,196,0.18);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    position: relative;
+  }
+  .bolero-palette .b-swatch::after {
+    content: attr(data-name);
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(251,233,196,0.55);
+  }
+  .bolero-menu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-bottom: 5vh;
+  }
+  .bolero-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1.2rem 1rem;
+    border: 1px solid rgba(251,233,196,0.18);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(245,184,46,0.06), rgba(122,10,18,0.50));
+    transition: transform 200ms ease, border-color 200ms ease;
+  }
+  .bolero-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(245,184,46,0.45);
+  }
+  .bolero-item .b-icon { font-size: 2.4rem; line-height: 1; }
+  .bolero-item .label { color: var(--bo-cream); opacity: 0.85; font-size: 0.62rem; }
+  .bolero-item .desc {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--bo-yellow);
+    letter-spacing: -0.01em;
+  }
+  .bolero-item .price {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.78rem;
+    color: rgba(251,233,196,0.65);
+  }
+  .bolero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.6rem;
+    border-radius: 999px;
+    background: var(--bo-yellow);
+    color: var(--bo-brown-deep);
+    text-decoration: none;
+    font-family: 'Geist', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 0 var(--bo-brown-deep);
+    transition: transform 180ms cubic-bezier(.2,.7,.2,1), box-shadow 180ms ease;
+  }
+  .bolero-cta:hover { transform: translateY(-2px); }
+  .bolero-cta:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--bo-brown-deep); }
+
+  @media (max-width: 800px) {
+    .bolero-stage { grid-template-columns: 1fr; gap: 3vh; }
+    .bolero-art svg { max-width: 60vw; }
+    .bolero-menu { grid-template-columns: 1fr; gap: 0.8rem; }
+    .bolero-palette .b-swatch { width: 44px; height: 44px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV REMOVED — cover-tape and section numbers now handle context -->
+
+<!-- 01 · COVER -->
+<section class="cover" id="cover">
+
+  <!-- Editorial top tape -->
+  <div class="cover-tape">
+    <span><span class="pulse-dot"></span>BRAND IDENTITY · EDITION 01 · MMXXVI</span>
+    <span>MNL · 14.5995°N / 120.9842°E</span>
+  </div>
+
+  <!-- 8-rayed sun motif (flag reference) -->
+  <svg class="cover-sun" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#F4ECDC">
+      <circle cx="100" cy="100" r="22"/>
+      <g>
+        <polygon points="100,0 108,75 92,75"/>
+        <polygon points="200,100 125,108 125,92"/>
+        <polygon points="100,200 92,125 108,125"/>
+        <polygon points="0,100 75,92 75,108"/>
+        <polygon points="170,30 118,82 130,93"/>
+        <polygon points="170,170 117,118 107,130"/>
+        <polygon points="30,170 82,117 92,128"/>
+        <polygon points="30,30 82,82 93,71"/>
+      </g>
+    </g>
+  </svg>
+
+  <!-- Huge edition number behind -->
+  <div class="cover-bignum">01</div>
+
+  <!-- Dramatic ECG -->
+  <svg class="ecg" viewBox="0 0 1400 80" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 40 L280 40 L300 40 L315 8 L330 72 L345 4 L360 78 L375 40 L680 40 L700 40 L715 10 L730 70 L745 6 L760 76 L775 40 L1080 40 L1100 40 L1115 12 L1130 68 L1145 8 L1160 72 L1175 40 L1400 40" stroke="#F4ECDC" stroke-width="2"/>
+  </svg>
+
+  <div class="cover-grid">
+    <h1 class="cover-title">
+      <span class="lineA">Pulse</span>
+      <span class="lineB">Fusion</span>
+      <span class="lineC">Republic</span>
+    </h1>
+
+    <p class="cover-hero-tag">Locally Flavoured, <em>Globally Craved.</em></p>
+  </div>
+
+  <div class="cover-meta">
+    <p class="tagline">
+      A republic of Filipino<br>
+      fusion kitchens.
+    </p>
+    <span style="font-family: 'Geist Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.7;">
+      ◉ #CE1126 · OLD GLORY RED
+    </span>
+  </div>
+</section>
+
+<!-- 02 · MANIFESTO -->
+<section class="manifesto">
+  <div class="section-num mono">01 / Manifesto</div>
+
+  <div class="manifesto-grid">
+    <h2>A republic of <em>curious kitchens.</em></h2>
+
+    <div class="manifesto-body">
+      <p>Pulse Fusion Republic is a Filipino food group built on a simple truth: this cuisine has always been curious. Spanish, Chinese, Malay, American, Japanese — all of it has passed through our kitchens, our markets, our lolas' hands, and come out something new.</p>
+      <p>We carry that pulse forward across a growing family of concepts. Lola's adobo meets a Tokyo izakaya. Sinigang reimagined. Ube where you didn't expect it. Food that asks <em style="color: var(--red); font-style: italic; font-family: 'Instrument Serif', serif; font-size: 1.2em;">"what if?"</em> and answers in Taglish.</p>
+      <p>Not nostalgia. Not novelty. <strong>A republic, plated.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · CONCEPT -->
+<section class="concept">
+  <div class="section-num mono">02 / Concept</div>
+
+  <div class="concept-grid">
+    <div>
+      <p class="label" style="color: var(--cream); opacity: 0.6; margin-bottom: 1.5rem;">CORE CONCEPT</p>
+      <p class="concept-pull">
+        A <em>republic</em> of Filipino kitchens — tradition fused with <em>global curiosity.</em>
+      </p>
+    </div>
+
+    <ul class="concept-list">
+      <li>
+        <span class="idx">001</span>
+        <span class="what"><em>Mang Guabao</em> — adobo, sisig tucked into a steamed bao.</span>
+      </li>
+      <li>
+        <span class="idx">002</span>
+        <span class="what"><em>Bolero's Meatballs</em> — Italian by name, Filipino at heart.</span>
+      </li>
+      <li>
+        <span class="idx">003</span>
+        <span class="what">Food that asks <em>"what if?"</em> and answers in Taglish.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 04 · PALETTE -->
+<section class="palette">
+  <div class="section-num mono">03 / Palette</div>
+
+  <div class="palette-header">
+    <h2>Anchored in <em>flag red.</em><br>Plated in warmth.</h2>
+    <p>The primary is no accident — it's the same red that anchors the Philippine flag. Old Glory Red, Cable No. 70180, standardized in 1955. Held against warm cream and charred ink, with unexpected gold and ube for moments of curiosity.</p>
+  </div>
+
+  <div class="swatches">
+    <div class="swatch sw-red">
+      <span class="mono">PRIMARY · FLAG RED</span>
+      <div>
+        <div class="name">Bandila Red</div>
+        <p class="desc">Philippine Flag Red. Old Glory Red, Cable No. 70180. Sawsawan heat with national weight.</p>
+        <span class="hex" style="display: block; margin-top: 0.8rem;">#CE1126</span>
+      </div>
+    </div>
+    <div class="swatch sw-cream">
+      <span class="mono">SUPPORT</span>
+      <div>
+        <div class="name">Bigas Cream</div>
+        <p class="desc">Rice, coconut.</p>
+        <span class="hex" style="display: block; margin-top: 0.8rem;">#EFE4CE</span>
+      </div>
+    </div>
+    <div class="swatch sw-charcoal">
+      <span class="mono">SUPPORT</span>
+      <div>
+        <div class="name">Char Ink</div>
+        <p class="desc">Grill mark. Soy reduction.</p>
+        <span class="hex" style="display: block; margin-top: 0.8rem;">#161210</span>
+      </div>
+    </div>
+    <div class="swatch sw-gold">
+      <span class="mono">ACCENT</span>
+      <div>
+        <div class="name">Itlog Gold</div>
+        <p class="desc">Yolk. Turmeric.</p>
+        <span class="hex" style="display: block; margin-top: 0.8rem;">#D4A24C</span>
+      </div>
+    </div>
+    <div class="swatch sw-ube">
+      <span class="mono">ACCENT</span>
+      <div>
+        <div class="name">Ube Pop</div>
+        <p class="desc">The unexpected.</p>
+        <span class="hex" style="display: block; margin-top: 0.8rem;">#6B4E8E</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · TYPOGRAPHY -->
+<section class="typography">
+  <div class="section-num mono">04 / Typography</div>
+
+  <div class="palette-header" style="margin-bottom: 2vh;">
+    <h2>Set with <em>weight</em><br>and warmth.</h2>
+    <p>A display face with editorial character. A serif that whispers handwritten recipe. A grotesque body that gets out of the way.</p>
+  </div>
+
+  <div class="type-grid">
+
+    <div class="type-block">
+      <div class="meta-col">
+        <span class="label">DISPLAY · FRAUNCES</span>
+        <p>Variable serif with character. Used for headlines and brand moments. Hits like the first bite of crispy pata.</p>
+      </div>
+      <div>
+        <div class="type-specimen-display">Sarap, <em>reimagined.</em></div>
+        <div class="type-aaz">A B C D E F G H I J K L M N O Ñ P Q R S T U V W X Y Z &nbsp;·&nbsp; 0 1 2 3 4 5 6 7 8 9</div>
+      </div>
+    </div>
+
+    <div class="type-block">
+      <div class="meta-col">
+        <span class="label">EDITORIAL · INSTRUMENT SERIF</span>
+        <p>For menu items, storytelling, pull quotes. Feels like a handwritten recipe from a tita.</p>
+      </div>
+      <div>
+        <div class="type-specimen-editorial">Guabao <em>×</em> Boleros.</div>
+        <div class="type-aaz">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn &nbsp;·&nbsp; Italics tell stories.</div>
+      </div>
+    </div>
+
+    <div class="type-block">
+      <div class="meta-col">
+        <span class="label">BODY · GEIST</span>
+        <p>Clean, modern grotesque for paragraphs, captions, and interface. Gets out of the way so the food can speak.</p>
+      </div>
+      <div>
+        <p class="type-specimen-body">A culture that has always borrowed, blended, and reinvented. We carry that pulse forward — into every plate, every dipping sauce, every "tara, kain na." Curiosity, plated.</p>
+        <div class="type-aaz">REGULAR · MEDIUM · SEMIBOLD &nbsp;·&nbsp; 0123456789</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 06 · VISUAL DIRECTION -->
+<section class="visual">
+  <div class="section-num mono" style="color: var(--cream);">05 / Visual Direction</div>
+
+  <h2>Kinetic. Sensory. <em>Mouthwatering.</em></h2>
+
+  <div class="visual-grid">
+    <div class="v-card">
+      <span class="num">001 · MOTION</span>
+      <div>
+        <p class="title">Steam, <em>sizzle, ripple.</em></p>
+        <p class="desc">Curls, flame licks, broth waves. Anything that moves like food does.</p>
+      </div>
+    </div>
+
+    <div class="v-card">
+      <span class="num">002 · PATTERN</span>
+      <div>
+        <p class="title">Banig weave. <em>Baybayin.</em> Sun-rays.</p>
+        <p class="desc">Filipino cues, woven in as texture — never as costume.</p>
+      </div>
+    </div>
+
+    <div class="v-card">
+      <span class="num">003 · PHOTOGRAPHY</span>
+      <div>
+        <p class="title">Moody. Close-up. <em>High-contrast.</em></p>
+        <p class="desc">Glistening sauces. Char marks. Hands tearing lechon. Condensation on a San Mig bottle.</p>
+      </div>
+    </div>
+
+    <div class="v-card">
+      <span class="num">004 · ICONOGRAPHY</span>
+      <div>
+        <p class="title">Hand-drawn <em>ingredients.</em></p>
+        <p class="desc">Sili, calamansi, ube — sketched, not stocked.</p>
+      </div>
+    </div>
+
+    <div class="v-card">
+      <span class="num">005 · TEXTURE</span>
+      <div>
+        <p class="title">Banana leaf. <em>Clay. Grain.</em></p>
+        <p class="desc">Natural materials over digital gradients. Touch over polish.</p>
+      </div>
+    </div>
+
+    <div class="v-card">
+      <span class="num">006 · LAYOUT</span>
+      <div>
+        <p class="title">Asymmetric. <em>Editorial.</em></p>
+        <p class="desc">Generous whitespace meets bold red blocks. Magazine, not menu board.</p>
+      </div>
+    </div>
+
+    <div class="v-card avoid">
+      <div>
+        <span class="num" style="opacity: 0.85;">⊘ AVOID</span>
+        <p class="title" style="margin-top: 0.5rem;">No clichés.</p>
+      </div>
+      <p class="desc">Nipa-hut kitsch. Jeepney pastiche. Tropical-sunset stock. Bahay-kubo as logo. We are modern Filipino — proud, not performative.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 · TONE OF VOICE -->
+<section class="tone">
+  <div class="section-num mono">06 / Tone of Voice</div>
+
+  <p class="label" style="margin-top: 4vh;">HOW WE SOUND</p>
+  <p class="tone-quote">Sarap, but make it <em>modern.</em></p>
+
+  <div class="tone-attribute">
+    <span class="tone-pill filled">Curious</span>
+    <span class="tone-pill filled">Playful</span>
+    <span class="tone-pill filled">Proud</span>
+    <span class="tone-pill filled">Hungry</span>
+    <span class="tone-pill">Warm, never cute</span>
+    <span class="tone-pill">Bold, never loud</span>
+    <span class="tone-pill">Taglish, fluent</span>
+    <span class="tone-pill">Opinionated about food</span>
+  </div>
+
+  <p style="font-family: 'Instrument Serif', serif; font-size: clamp(1.2rem, 1.6vw, 1.6rem); line-height: 1.4; max-width: 52ch; margin-top: 5vh;">
+    We talk about food the way Filipinos actually talk about food — with humor, with memory, with strong opinions. We don't explain <em style="font-style: italic; color: var(--red);">sarap.</em> We just deliver it.
+  </p>
+</section>
+
+<!-- 08 · BRAND PERSONALITY -->
+<section class="personality">
+  <div class="section-num mono" style="color: var(--cream);">07 / Personality</div>
+
+  <div class="personality-grid">
+    <h2>If the brand were <em>a person...</em></h2>
+
+    <div>
+      <p class="personality-text">
+        The friend who studied abroad, came home obsessed with lola's cooking, and now runs the most exciting kitchen in town.<br><br>
+        <em style="font-style: italic;">Rooted but restless. Reverent but irreverent.</em>
+      </p>
+    </div>
+  </div>
+
+  <div class="personality-attrs">
+    <div class="pa"><span class="from">ROOTED IN</span><div class="word">Lola's kitchen</div></div>
+    <div class="pa"><span class="from">FUELED BY</span><div class="word">Curiosity</div></div>
+    <div class="pa"><span class="from">SPEAKS</span><div class="word">Taglish, fluently</div></div>
+    <div class="pa"><span class="from">SERVES</span><div class="word">What if?</div></div>
+  </div>
+</section>
+
+<!-- 09 · MOOD WORDS -->
+<section class="mood">
+  <div class="mood-label">
+    <span class="label">08 / Mood</span>
+  </div>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Pulse</span><span class="dot">·</span>
+      <span>Sarap</span><span class="dot">·</span>
+      <span>Fusion</span><span class="dot">·</span>
+      <span>Kinetic</span><span class="dot">·</span>
+      <span>Smoky</span><span class="dot">·</span>
+      <span>Bold</span><span class="dot">·</span>
+      <span>Rooted</span><span class="dot">·</span>
+      <span>Curious</span><span class="dot">·</span>
+      <span>Alive</span><span class="dot">·</span>
+      <span>Alab</span><span class="dot">·</span>
+      <!-- duplicate for seamless loop -->
+      <span>Pulse</span><span class="dot">·</span>
+      <span>Sarap</span><span class="dot">·</span>
+      <span>Fusion</span><span class="dot">·</span>
+      <span>Kinetic</span><span class="dot">·</span>
+      <span>Smoky</span><span class="dot">·</span>
+      <span>Bold</span><span class="dot">·</span>
+      <span>Rooted</span><span class="dot">·</span>
+      <span>Curious</span><span class="dot">·</span>
+      <span>Alive</span><span class="dot">·</span>
+      <span>Alab</span><span class="dot">·</span>
+    </div>
+  </div>
+
+  <div class="marquee reverse" style="margin-top: 1.5vh;">
+    <div class="marquee-track">
+      <span>What if?</span><span class="dot">·</span>
+      <span>Tara, kain na.</span><span class="dot">·</span>
+      <span>Bagong mundo.</span><span class="dot">·</span>
+      <span>Guabao × Boleros.</span><span class="dot">·</span>
+      <span>Ube, again?</span><span class="dot">·</span>
+      <span>What if?</span><span class="dot">·</span>
+      <span>Tara, kain na.</span><span class="dot">·</span>
+      <span>Bagong mundo.</span><span class="dot">·</span>
+      <span>Guabao × Boleros.</span><span class="dot">·</span>
+      <span>Ube, again?</span><span class="dot">·</span>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · TAGLINES -->
+<section class="taglines">
+  <div class="section-num mono">09 / Taglines</div>
+
+  <div class="palette-header" style="margin-bottom: 2vh;">
+    <h2>Lines to <em>live by.</em></h2>
+    <p>One hero line carries the brand. The rest are angles, voices, and language variations that flex across menus, campaigns, and storytelling — all orbiting the same truth.</p>
+  </div>
+
+  <ul class="taglines-list">
+    <li>
+      <span class="tag-num">001 · HERO</span>
+      <span class="tag-text">Locally Flavoured, <em>Globally Craved.</em></span>
+      <span class="tag-lang">EN</span>
+    </li>
+    <li>
+      <span class="tag-num">002</span>
+      <span class="tag-text">A republic of <em>Filipino fusion.</em></span>
+      <span class="tag-lang">EN</span>
+    </li>
+    <li>
+      <span class="tag-num">003</span>
+      <span class="tag-text">Filipino flavor, <em>global curiosity.</em></span>
+      <span class="tag-lang">EN</span>
+    </li>
+    <li>
+      <span class="tag-num">004</span>
+      <span class="tag-text">Sarap, <em>reimagined.</em></span>
+      <span class="tag-lang">TAGLISH</span>
+    </li>
+    <li>
+      <span class="tag-num">005</span>
+      <span class="tag-text">Lutong bayan, <em>bagong mundo.</em></span>
+      <span class="tag-lang">FIL</span>
+    </li>
+    <li>
+      <span class="tag-num">006</span>
+      <span class="tag-text">Many kitchens. <em>One republic.</em></span>
+      <span class="tag-lang">EN</span>
+    </li>
+  </ul>
+</section>
+
+<!-- 12 · MANG GUABAO SHOWCASE — sister concept under the Pulse Fusion Republic -->
+<section class="mang-showcase" id="mang-guabao">
+  <div class="section-num mono">12 / Companion brand</div>
+
+  <div class="mang-header">
+    <h2>From the same kitchen: <em>Mang Guabao.</em></h2>
+    <p>A homegrown Manila concept that takes the East-Asian bao technique and stuffs it with unapologetically Filipino fillings — Sisig, Lechon, Bicol Express. Built in the same fusion-republic spirit: own your roots, plate with warmth.</p>
+  </div>
+
+  <div class="mang-stage">
+    <div class="mang-mascot">
+      <img
+        src="/assets/mascot-800.webp"
+        srcset="/assets/mascot-300.webp 300w, /assets/mascot-800.webp 800w"
+        sizes="(max-width: 800px) 60vw, 360px"
+        alt="Mang G — Mang Guabao mascot"
+        decoding="async"
+      />
+    </div>
+
+    <div class="mang-meta">
+      <span class="mang-tag">Hawak ang Sarap.</span>
+      <p>Six guabaos, one vibe. Filipino fillings, kawaii mascot, packaging built for the streets. Same fusion DNA, different ingredient set — a sister concept under the same republic of curious kitchens.</p>
+
+      <div class="mang-palette">
+        <span class="m-swatch" style="background: var(--mg-saging);"     data-name="Saging"></span>
+        <span class="m-swatch" style="background: var(--mg-saffron);"    data-name="Saffron"></span>
+        <span class="m-swatch" style="background: var(--mg-leaf);"       data-name="Leaf"></span>
+        <span class="m-swatch" style="background: var(--mg-sili);"       data-name="Sili"></span>
+        <span class="m-swatch" style="background: var(--mg-bao); border: 1px solid rgba(0,0,0,0.08);" data-name="Bao"></span>
+        <span class="m-swatch" style="background: var(--mg-lechon);"     data-name="Lechon"></span>
+      </div>
+    </div>
+  </div>
+
+  <p class="label" style="color: rgba(255,253,247,0.55); margin-bottom: 2vh;">SIX SIGNATURE GUABAOS</p>
+  <div class="mang-menu">
+    <a class="mang-item" href="/presentation#menu">
+      <img src="/assets/guabaos/sisig-600.webp"      alt="Sisig Guabao"           loading="lazy" decoding="async" />
+      <span class="label">Sisig</span>
+    </a>
+    <a class="mang-item" href="/presentation#menu">
+      <img src="/assets/guabaos/lechon-600.webp"     alt="Lechon Guabao"          loading="lazy" decoding="async" />
+      <span class="label">Lechon</span>
+    </a>
+    <a class="mang-item" href="/presentation#menu">
+      <img src="/assets/guabaos/bicol-600.webp"      alt="Bicol Express Guabao"   loading="lazy" decoding="async" />
+      <span class="label">Bicol Express</span>
+    </a>
+    <a class="mang-item" href="/presentation#menu">
+      <img src="/assets/guabaos/longganisa-600.webp" alt="Longganisa Guabao"      loading="lazy" decoding="async" />
+      <span class="label">Longganisa</span>
+    </a>
+    <a class="mang-item" href="/presentation#menu">
+      <img src="/assets/guabaos/adobo-600.webp"      alt="Adobo Guabao"           loading="lazy" decoding="async" />
+      <span class="label">Adobo</span>
+    </a>
+    <a class="mang-item" href="/presentation#menu">
+      <img src="/assets/guabaos/tocino-600.webp"     alt="Tocino Guabao"          loading="lazy" decoding="async" />
+      <span class="label">Tocino</span>
+    </a>
+  </div>
+
+  <a href="/presentation" class="mang-cta">
+    View the live showcase
+    <span class="mang-cta-arrow">→</span>
+  </a>
+</section>
+
+<!-- 13 · BOLEROS MEATBALLS SHOWCASE — sister concept #2 -->
+<section class="bolero-showcase" id="boleros-meatballs">
+  <div class="section-num mono">13 / Companion brand</div>
+
+  <div class="bolero-header">
+    <h2>And the louder cousin: <em>Boleros Meatballs.</em></h2>
+    <p>Pang-masa. Pang-bayan. Pang-lahat. A street-food meatball concept built for the kanto, the mall, the family table — same fusion republic, dialed all the way up with grill smoke, sauce drips, and unapologetic Tagalog headlines.</p>
+  </div>
+
+  <div class="bolero-stage">
+    <div class="bolero-art" aria-hidden="true">
+      <!-- Inline meatball-on-skewer SVG matching the Boleros visual language -->
+      <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="bo-ball" cx="35%" cy="28%" r="68%">
+            <stop offset="0%" stop-color="#D08A4A"/>
+            <stop offset="55%" stop-color="#7A3416"/>
+            <stop offset="100%" stop-color="#3A170B"/>
+          </radialGradient>
+          <radialGradient id="bo-bowl" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#F5B82E"/>
+            <stop offset="100%" stop-color="#D8262D"/>
+          </radialGradient>
+        </defs>
+        <!-- bowl underneath -->
+        <ellipse cx="160" cy="270" rx="120" ry="22" fill="rgba(0,0,0,0.4)" filter="blur(4px)"/>
+        <path d="M50 240 L270 240 L255 290 Q250 300 235 300 L85 300 Q70 300 65 290 Z" fill="url(#bo-bowl)" stroke="#1A0F0A" stroke-width="5"/>
+        <ellipse cx="160" cy="240" rx="110" ry="14" fill="#7A0A12" stroke="#1A0F0A" stroke-width="4"/>
+        <!-- skewer behind -->
+        <line x1="80" y1="280" x2="240" y2="50" stroke="#D4B074" stroke-width="9" stroke-linecap="round"/>
+        <line x1="80" y1="280" x2="240" y2="50" stroke="#1A0F0A" stroke-width="2"/>
+        <!-- 3 meatballs -->
+        <g stroke="#1A0F0A" stroke-width="6">
+          <circle cx="115" cy="220" r="46" fill="url(#bo-ball)"/>
+          <circle cx="175" cy="155" r="46" fill="url(#bo-ball)"/>
+          <circle cx="225" cy="90"  r="40" fill="url(#bo-ball)"/>
+        </g>
+        <!-- bumpy texture -->
+        <g fill="#3A170B" opacity="0.55">
+          <circle cx="100" cy="210" r="5"/>
+          <circle cx="130" cy="234" r="4"/>
+          <circle cx="160" cy="148" r="5"/>
+          <circle cx="195" cy="170" r="4"/>
+          <circle cx="220" cy="80" r="4"/>
+        </g>
+        <!-- shine highlights -->
+        <g fill="#FFE074" opacity="0.85">
+          <ellipse cx="100" cy="200" rx="14" ry="6" transform="rotate(-28 100 200)"/>
+          <ellipse cx="162" cy="138" rx="13" ry="6" transform="rotate(-28 162 138)"/>
+          <ellipse cx="214" cy="78" rx="11" ry="5" transform="rotate(-28 214 78)"/>
+        </g>
+        <!-- parsley flecks -->
+        <g fill="#3A8C2A" stroke="#1A0F0A" stroke-width="1">
+          <ellipse cx="138" cy="190" rx="6" ry="3" transform="rotate(20 138 190)"/>
+          <ellipse cx="195" cy="130" rx="5" ry="3" transform="rotate(-15 195 130)"/>
+          <ellipse cx="215" cy="115" rx="4" ry="2" transform="rotate(40 215 115)"/>
+        </g>
+        <!-- sauce drip from top meatball -->
+        <path d="M210 105 Q215 130 220 150" fill="none" stroke="#D8262D" stroke-width="5" stroke-linecap="round"/>
+        <path d="M205 100 Q198 115 195 130" fill="none" stroke="#D8262D" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="bolero-meta">
+      <span class="bolero-tag">Bilog na Sarap.</span>
+      <p>Beef, moink, and frozen — three takes on the same idea: a meatball you can eat with three fingers, dipping into sawsawan from a sari-sari sauce cup. Pricing kept under ₱100 because pang-bayan, dapat. Same fusion DNA, opposite end of the dining-room spectrum.</p>
+
+      <div class="bolero-palette">
+        <span class="b-swatch" style="background: var(--bo-red);"     data-name="Flag Red"></span>
+        <span class="b-swatch" style="background: var(--bo-orange);"  data-name="Glaze"></span>
+        <span class="b-swatch" style="background: var(--bo-yellow);"  data-name="Letter Y"></span>
+        <span class="b-swatch" style="background: var(--bo-cream);"   data-name="Bigas"></span>
+        <span class="b-swatch" style="background: var(--bo-brown);"   data-name="Grill"></span>
+        <span class="b-swatch" style="background: var(--bo-char); border-color: rgba(251,233,196,0.30);" data-name="Char"></span>
+      </div>
+    </div>
+  </div>
+
+  <p class="label" style="color: rgba(251,233,196,0.55); margin-bottom: 2vh;">TATLONG BOLA · THREE WAYS TO TIRA</p>
+  <div class="bolero-menu">
+    <a class="bolero-item" href="boleros.html#products">
+      <span class="b-icon" aria-hidden="true">🍖</span>
+      <span class="label">Signature</span>
+      <span class="desc">Beef Balls</span>
+      <span class="price">₱69 · 6 PCS</span>
+    </a>
+    <a class="bolero-item" href="boleros.html#products">
+      <span class="b-icon" aria-hidden="true">🥩</span>
+      <span class="label">Pork + Beef</span>
+      <span class="desc">Moink Balls</span>
+      <span class="price">₱79 · 6 PCS</span>
+    </a>
+    <a class="bolero-item" href="boleros.html#products">
+      <span class="b-icon" aria-hidden="true">🧊</span>
+      <span class="label">Take-home</span>
+      <span class="desc">Frozen Beef</span>
+      <span class="price">₱149 · 25 PCS</span>
+    </a>
+  </div>
+
+  <a href="boleros.html" class="bolero-cta">
+    Open the Boleros brand book
+    <span class="mang-cta-arrow">→</span>
+  </a>
+</section>
+
+<!-- 11 · SIGNOFF -->
+<section class="signoff">
+  <div>
+    <p class="label" style="color: var(--cream); margin-bottom: 3vh;">— END OF DOCUMENT —</p>
+    <h2>
+      Tara, <em>kain na.</em>
+    </h2>
+  </div>
+
+  <div class="signoff-footer">
+    <span>PULSE FUSION REPUBLIC · BRAND IDENTITY · ED. 01 · 2026</span>
+    <span><span class="pulse-dot"></span>STILL PULSING</span>
+  </div>
+</section>
+
+</body>
+</html>
