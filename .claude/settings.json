@@ -5,7 +5,10 @@
       "Bash(python c:/tmp/extract-boleros-mascot.py)",
       "Bash(python c:/tmp/extract-boleros3.py)",
       "Bash(python c:/tmp/crop-boleros-mascot.py)",
-      "Bash(curl -s -o /dev/null -w \"pulse-fusion: %{http_code}\\\\n\" http://localhost:5173/brand-books/pulse-fusion.html)"
+      "Bash(curl -s -o /dev/null -w \"pulse-fusion: %{http_code}\\\\n\" http://localhost:5173/brand-books/pulse-fusion.html)",
+      "Bash(python -c ' *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
