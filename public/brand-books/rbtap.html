@@ -447,6 +447,148 @@ body{
   .pillars,.icon-grid,.donts,.uniform-row,.type-pairs,.logo-row-3{grid-template-columns:1fr}
   .hero-bottom{flex-direction:column;align-items:flex-start;gap:24px}
 }
+
+/* ============================================================
+   POLISH PASS — scroll reveals, progress, color blends,
+   parallax accents, active-section nav indicator.
+   Everything respects prefers-reduced-motion.
+   ============================================================ */
+
+/* 1. Scroll-driven fade-up reveal on each section */
+.section, .hero, .footer {
+  /* default state — hidden, slightly below resting position */
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 700ms cubic-bezier(.2,.7,.2,1),
+              transform 700ms cubic-bezier(.2,.7,.2,1);
+  will-change: opacity, transform;
+}
+.section.is-visible, .hero.is-visible, .footer.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Hero starts visible (above the fold on load) so there's no FOUC flash */
+.hero { opacity: 1; transform: none; }
+
+/* 2. Color-blend overlays — soften the hard light↔dark section jumps */
+.section, .footer { position: relative; }
+.section--blend-top::before,
+.section--blend-bottom::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: 1;
+}
+.section--blend-top::before    { top: 0;    background: linear-gradient(to bottom, var(--blend-from, transparent), transparent); }
+.section--blend-bottom::after  { bottom: 0; background: linear-gradient(to top,    var(--blend-from, transparent), transparent); }
+
+/* 3. Scroll progress bar — thin saffron-red line at top of viewport */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(to right, var(--red-deep), var(--red-bright));
+  z-index: 200;
+  transition: width 120ms linear;
+  pointer-events: none;
+}
+
+/* 4. Subtle parallax — decorative bg elements drift slower than content */
+.parallax-slow { will-change: transform; transition: transform 120ms linear; }
+
+/* 5. Active section indicator in the nav (replaces the static "Volume 01") */
+.nav-section-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: rgba(43,45,66,0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transition: opacity 220ms ease;
+}
+.nav-section-indicator .dot-marker {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red-deep);
+  box-shadow: 0 0 10px rgba(217,4,41,0.5);
+  animation: nav-pulse 2.2s ease-in-out infinite;
+}
+@keyframes nav-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.25); }
+}
+.nav-section-indicator .num {
+  color: var(--red-deep);
+  font-weight: 600;
+}
+.nav-section-indicator.is-fading { opacity: 0; }
+
+/* 6. Anchor scroll offset — sections jump to position with the fixed nav cleared */
+section[id] { scroll-margin-top: 80px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .section, .hero, .footer {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .scroll-progress { transition: none !important; }
+  .nav-section-indicator .dot-marker { animation: none !important; }
+  .parallax-slow { transform: none !important; }
+}
+
+/* Brand at a Glance — concept poster section */
+.glance-sec { background: var(--white); }
+.glance-frame {
+  position: relative;
+  margin-top: 56px;
+  border: 1px solid var(--line);
+  background: var(--cream);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(43,45,66,0.08);
+}
+.glance-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.glance-corner-tape {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red-deep);
+  background: rgba(255,255,255,0.92);
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+.glance-foot {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(43,45,66,0.55);
+}
+.glance-foot .red { color: var(--red-deep); }
+
 </style>
 </head>
 <body>
@@ -454,25 +596,23 @@ body{
 <!-- ===== NAV ===== -->
 <nav class="nav">
   <div class="nav-logo">
-    <svg class="dot" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 6 L88 28 L88 72 L50 94 L12 72 L12 28 Z" fill="#D90429"/>
-      <path d="M12 28 L50 50 L88 28 M50 50 L50 94" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linejoin="round"/>
-      <text x="32" y="46" font-family="Archivo, sans-serif" font-weight="900" font-size="14" fill="#FFFFFF" text-anchor="middle">R</text>
-      <text x="68" y="46" font-family="Archivo, sans-serif" font-weight="900" font-size="14" fill="#FFFFFF" text-anchor="middle">B</text>
-      <text x="50" y="80" font-family="Archivo, sans-serif" font-weight="900" font-size="14" fill="#FFFFFF" text-anchor="middle">T</text>
-    </svg>
+    <img class="dot" src="/assets/rbs-logo-120.webp" alt="RBS" width="24" height="24" decoding="async" />
     <span>RBTap — Brand System</span>
   </div>
   <div class="nav-meta">
-    <span>Volume 01</span>
+    <span class="nav-section-indicator" id="nav-section-indicator" aria-live="polite">
+      <span class="dot-marker"></span>
+      <span class="num">01</span>
+      <span class="label">Introduction</span>
+    </span>
     <span>v1.0</span>
     <span>2026</span>
   </div>
 </nav>
 
 <!-- ===== HERO ===== -->
-<section class="hero" id="hero">
-  <div class="hero-grid-bg"></div>
+<section class="hero" id="hero" data-section-name="Introduction" data-section-num="01">
+  <div class="hero-grid-bg parallax-slow"></div>
   <div class="hero-top">
     <div class="hero-eyebrow">
       <span class="red">●</span> A digital payment ecosystem // <span class="red">Provincial-grade</span> infrastructure for everyday Filipinos
@@ -480,12 +620,7 @@ body{
     <div class="hero-parent">
       <span>Powered by</span>
       <div class="hero-parent-mark">
-        <svg width="22" height="22" viewBox="0 0 100 100">
-          <path d="M50 12 L84 32 L84 68 L50 88 L16 68 L16 32 Z" fill="none" stroke="#D90429" stroke-width="6" stroke-linejoin="round"/>
-          <text x="32" y="46" font-family="Archivo" font-weight="900" font-size="22" fill="#D90429" text-anchor="middle">R</text>
-          <text x="68" y="46" font-family="Archivo" font-weight="900" font-size="22" fill="#D90429" text-anchor="middle">B</text>
-          <text x="50" y="76" font-family="Archivo" font-weight="900" font-size="22" fill="#D90429" text-anchor="middle">S</text>
-        </svg>
+        <img src="/assets/rbs-logo-120.webp" alt="RBS" width="22" height="22" decoding="async" />
       </div>
       <span>RBS Group</span>
     </div>
@@ -496,19 +631,7 @@ body{
       <h1 class="hero-wordmark">RB<span class="tap">Tap</span><span class="cursor"></span></h1>
     </div>
     <div class="hero-right">
-      <svg class="hero-mark-large" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="grad-hero" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#D90429"/>
-            <stop offset="1" stop-color="#EF233C"/>
-          </linearGradient>
-        </defs>
-        <path d="M100 18 L168 56 L168 144 L100 182 L32 144 L32 56 Z" fill="url(#grad-hero)"/>
-        <path d="M32 56 L100 96 L168 56 M100 96 L100 182" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linejoin="round"/>
-        <text x="64" y="86" font-family="Archivo, sans-serif" font-weight="900" font-size="28" fill="#FFFFFF" text-anchor="middle">R</text>
-        <text x="136" y="86" font-family="Archivo, sans-serif" font-weight="900" font-size="28" fill="#FFFFFF" text-anchor="middle">B</text>
-        <text x="100" y="148" font-family="Archivo, sans-serif" font-weight="900" font-size="28" fill="#FFFFFF" text-anchor="middle">T</text>
-      </svg>
+      <img class="hero-mark-large" src="/assets/rbs-logo-600.webp" srcset="/assets/rbs-logo-320.webp 320w, /assets/rbs-logo-600.webp 600w" sizes="240px" alt="RBS" width="240" height="240" decoding="async" />
       <div class="hero-tag">
         Tap Into <span>Digital Access.</span>
         <span class="small">Ang digital na serbisyo ng bayan.</span>
@@ -536,8 +659,35 @@ body{
   </div>
 </section>
 
+
+<!-- ===== BRAND AT A GLANCE ===== -->
+<section class="section glance-sec" id="glance" data-section-name="At a Glance" data-section-num="02">
+  <div class="container">
+    <div class="section-label">/ 02 — Brand at a Glance</div>
+    <h2 class="section-heading display">The whole system,<br/>one poster.</h2>
+    <p class="section-intro">Kiosks, mobile app, physical collateral, palette, services, and tone — every surface of RBTap on one composed sheet. The detailed sections that follow expand the pieces you'll work with day-to-day.</p>
+
+    <div class="glance-frame">
+      <span class="glance-corner-tape">Concept · v1.0</span>
+      <img
+        src="/assets/rbtap-concept-1600.webp"
+        srcset="/assets/rbtap-concept-800.webp 800w, /assets/rbtap-concept-1600.webp 1600w"
+        sizes="(max-width: 900px) 96vw, 1200px"
+        alt="RBTap brand concept poster — kiosks, services list, color palette, mockups, and tagline composed on a single sheet"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="glance-foot">
+      <span>Tap Into <span class="red">Digital Access</span></span>
+      <span>Concept summary · single-sheet reference</span>
+    </div>
+  </div>
+</section>
+
 <!-- ===== ESSENCE ===== -->
-<section class="section essence" id="essence">
+<section class="section essence" id="essence" data-section-name="Essence" data-section-num="03">
   <div class="container">
     <div class="section-label">/ 01 — The Brand</div>
     <h2 class="section-heading display">Bawat tap,<br><span style="color:var(--red-deep)">may digital access.</span></h2>
@@ -570,7 +720,7 @@ body{
 </section>
 
 <!-- ===== LOGO SYSTEM ===== -->
-<section class="section logo-sys" id="logo">
+<section class="section logo-sys" id="logo" data-section-name="Logo System" data-section-num="04">
   <div class="container">
     <div class="section-label">/ 02 — Logo System</div>
     <h2 class="section-heading display">A mark built for<br/>kiosks, screens & signage.</h2>
@@ -606,13 +756,7 @@ body{
           <span>02</span>
         </div>
         <div class="logo-card-display">
-          <svg width="180" height="180" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <path d="M100 12 L172 52 L172 148 L100 188 L28 148 L28 52 Z" fill="#D90429"/>
-            <path d="M28 52 L100 92 L172 52 M100 92 L100 188" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linejoin="round"/>
-            <text x="64" y="84" font-family="Archivo, sans-serif" font-weight="900" font-size="30" fill="#FFFFFF" text-anchor="middle">R</text>
-            <text x="136" y="84" font-family="Archivo, sans-serif" font-weight="900" font-size="30" fill="#FFFFFF" text-anchor="middle">B</text>
-            <text x="100" y="150" font-family="Archivo, sans-serif" font-weight="900" font-size="30" fill="#FFFFFF" text-anchor="middle">T</text>
-          </svg>
+          <img src="/assets/rbs-logo-320.webp" alt="RBS" width="180" height="180" decoding="async" />
         </div>
         <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(43,45,66,0.6);text-transform:uppercase;letter-spacing:0.1em">
           <span>App icons · Avatars · Stamps</span>
@@ -777,110 +921,10 @@ body{
     </div>
   </div>
 </section>
-
-<!-- ===== COLOR ===== -->
-<section class="section color-sec" id="color">
-  <div class="container">
-    <div class="section-label">/ 03 — Color</div>
-    <h2 class="section-heading display">Red, with confidence.</h2>
-    <p class="section-intro">A deep, decisive palette anchored in two reds that work hand-in-hand — Deep Digital Red for surfaces and trust signals, Bright Crimson for moments of energy. Graphite carries information; Silver Gray gives breathing room.</p>
-
-    <div class="color-grid">
-      <div class="color-card cc-red-deep">
-        <div>
-          <span class="color-card-tag">PRIMARY · 01</span>
-        </div>
-        <div>
-          <div class="color-card-name">Deep Digital Red</div>
-          <div class="color-card-hex">#D90429</div>
-        </div>
-        <div class="color-card-info">
-          <div><span>RGB</span><span>217 · 4 · 41</span></div>
-          <div><span>CMYK</span><span>0 · 98 · 81 · 15</span></div>
-          <div><span>PMS</span><span>186 C</span></div>
-          <div><span>USE</span><span>Primary surfaces, CTAs</span></div>
-        </div>
-      </div>
-      <div class="color-card cc-red-bright">
-        <div><span class="color-card-tag">PRIMARY · 02</span></div>
-        <div>
-          <div class="color-card-name">Bright Crimson</div>
-          <div class="color-card-hex">#EF233C</div>
-        </div>
-        <div class="color-card-info">
-          <div><span>RGB</span><span>239 · 35 · 60</span></div>
-          <div><span>USE</span><span>Accents, alerts</span></div>
-        </div>
-      </div>
-      <div class="color-card cc-white">
-        <div><span class="color-card-tag">PRIMARY · 03</span></div>
-        <div>
-          <div class="color-card-name">Pure White</div>
-          <div class="color-card-hex">#FFFFFF</div>
-        </div>
-        <div class="color-card-info">
-          <div><span>USE</span><span>Negative space</span></div>
-        </div>
-      </div>
-      <div class="color-card cc-graphite">
-        <div><span class="color-card-tag">SECONDARY · 04</span></div>
-        <div>
-          <div class="color-card-name">Dark Graphite</div>
-          <div class="color-card-hex">#2B2D42</div>
-        </div>
-        <div class="color-card-info">
-          <div><span>USE</span><span>Body text, footers</span></div>
-        </div>
-      </div>
-      <div class="color-card cc-silver">
-        <div><span class="color-card-tag">SECONDARY · 05</span></div>
-        <div>
-          <div class="color-card-name">Silver Gray</div>
-          <div class="color-card-hex">#EDF2F4</div>
-        </div>
-        <div class="color-card-info">
-          <div><span>USE</span><span>UI dividers, fields</span></div>
-        </div>
-      </div>
-      <div class="color-card cc-blue">
-        <div><span class="color-card-tag">ACCENT · 06</span></div>
-        <div>
-          <div class="color-card-name">Electric Blue</div>
-          <div class="color-card-hex">#0077B6</div>
-        </div>
-        <div class="color-card-info">
-          <div><span>USE</span><span>Data, infographics</span></div>
-        </div>
-      </div>
-      <div class="color-card cc-earth">
-        <div><span class="color-card-tag">ACCENT · 07</span></div>
-        <div>
-          <div class="color-card-name">Warm Terra</div>
-          <div class="color-card-hex">#C58B5A</div>
-        </div>
-        <div class="color-card-info">
-          <div><span>USE</span><span>Community moments</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="color-ratio">
-      <div class="color-ratio-label">Usage Proportion · Communication weight</div>
-      <div class="ratio-bar">
-        <div style="background:var(--white);flex:5;border:1px solid var(--line)" class="light">White · 50%</div>
-        <div style="background:var(--red-deep);flex:2.5">Red Deep · 25%</div>
-        <div style="background:var(--graphite);flex:1.5">Graphite · 15%</div>
-        <div style="background:var(--silver);flex:0.7" class="light">Silver · 7%</div>
-        <div style="background:var(--red-bright);flex:0.3">Bright · 3%</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ===== TYPOGRAPHY ===== -->
-<section class="section type-sec" id="typography">
+<section class="section type-sec" id="typography" data-section-name="Typography" data-section-num="05">
   <div class="container">
-    <div class="section-label">/ 04 — Typography</div>
+    <div class="section-label">/ 05 — Typography</div>
     <h2 class="section-heading display">Geometric. Readable.<br/>Mass-market ready.</h2>
     <p class="section-intro">Archivo carries the brand voice — bold, geometric, unmistakably modern, designed to read from across a barangay plaza. Hanken Grotesk handles the everyday text. JetBrains Mono adds technical precision to receipts, data, and labels.</p>
 
@@ -946,610 +990,8 @@ body{
     </div>
   </div>
 </section>
-
-<!-- ===== ICONOGRAPHY ===== -->
-<section class="section icons-sec" id="icons">
-  <div class="container">
-    <div class="section-label">/ 05 — Service Iconography</div>
-    <h2 class="section-heading display">Every service, one mark.</h2>
-    <p class="section-intro">A unified line-and-fill icon system covers the 14 RBTap services. Each icon is drawn on a 24-grid with 2px strokes — sharp at any size, friendly enough for first-time users to recognize at a glance.</p>
-
-    <div class="icon-grid">
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="7" cy="15" r="1.5"/><path d="M12 17V7M9 10l3-3 3 3M9 14l3 3 3-3"/></svg>
-        <span class="icon-cell-label">Cash-in</span>
-        <span class="icon-cell-fil">Mag-load</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M12 7v10M8 13l4 4 4-4"/></svg>
-        <span class="icon-cell-label">Cash-out</span>
-        <span class="icon-cell-fil">Mag-withdraw</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><circle cx="12" cy="9" r="2"/><path d="M8 16l2-2 2 2 4-4"/></svg>
-        <span class="icon-cell-label">E-Wallet</span>
-        <span class="icon-cell-fil">GCash · Maya</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h14l2 4v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8z"/><path d="M2 8h18"/><path d="M6 13h8M6 17h6"/></svg>
-        <span class="icon-cell-label">Bills Pay</span>
-        <span class="icon-cell-fil">Meralco · PLDT</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 18h3M14 19v2M21 14h-1"/></svg>
-        <span class="icon-cell-label">QR Pay</span>
-        <span class="icon-cell-fil">Scan · I-tap</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 6h4"/><circle cx="12" cy="18" r="1"/></svg>
-        <span class="icon-cell-label">Mobile Bank</span>
-        <span class="icon-cell-fil">App access</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 4h3l2 12h12l2-8H7"/></svg>
-        <span class="icon-cell-label">Online Shop</span>
-        <span class="icon-cell-fil">Shopee · Lazada</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/><path d="M10 11h4"/></svg>
-        <span class="icon-cell-label">Gov't Pay</span>
-        <span class="icon-cell-fil">BIR · SSS</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18"/><path d="M3 12l5-5M3 12l5 5"/><path d="M21 12l-5-5M21 12l-5 5"/><circle cx="12" cy="4" r="1.5"/><circle cx="12" cy="20" r="1.5"/></svg>
-        <span class="icon-cell-label">Remittance</span>
-        <span class="icon-cell-fil">Padala</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8L3 12l4 4M17 8l4 4-4 4M3 12h18"/></svg>
-        <span class="icon-cell-label">Transfer</span>
-        <span class="icon-cell-fil">InstaPay</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4M16 15h2"/></svg>
-        <span class="icon-cell-label">Loan Pay</span>
-        <span class="icon-cell-fil">Bayad-utang</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v6c0 5-3.5 7.5-8 8-4.5-.5-8-3-8-8V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
-        <span class="icon-cell-label">Insurance</span>
-        <span class="icon-cell-fil">Premium pay</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16C4 9 8 4 12 4s8 5 8 12"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
-        <span class="icon-cell-label">Telecom Load</span>
-        <span class="icon-cell-fil">Globe · Smart</span>
-      </div>
-      <div class="icon-cell">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
-        <span class="icon-cell-label">Aid Services</span>
-        <span class="icon-cell-fil">Ayuda</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== DIGITAL APPLICATIONS ===== -->
-<section class="section digital-sec" id="digital">
-  <div class="container">
-    <div class="section-label">/ 06 — Digital Touchpoints</div>
-    <h2 class="section-heading display" style="color:#fff">From kanto-store kiosk<br/>to the app sa bulsa.</h2>
-    <p class="section-intro">The same brand system flexes across every screen — from the 21" RBTap E-Tap kiosk in the plaza, to the countertop payment terminal in a sari-sari store, to the mobile app a teenager uses to send load home.</p>
-
-    <!-- PHONES -->
-    <div class="phones">
-      <!-- Phone 1: Home -->
-      <div class="phone">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="phone-status"><span>9:41</span><span>●●● ●●</span></div>
-          <div class="app-home-hdr">
-            <div>
-              <div class="app-home-greet">Magandang umaga,</div>
-              <div class="app-home-name">Hi, Maria!</div>
-            </div>
-            <div class="app-avatar">M</div>
-          </div>
-          <div class="app-balance">
-            <div class="app-balance-lbl">RBTap Balance</div>
-            <div class="app-balance-amt">₱ 12,450.00</div>
-            <div class="app-balance-foot">
-              <span>● Active</span>
-              <span>Cash-in →</span>
-            </div>
-          </div>
-          <div class="app-quick">
-            <div class="app-quick-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-              <span>Cash-in</span>
-            </div>
-            <div class="app-quick-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              <span>Padala</span>
-            </div>
-            <div class="app-quick-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/></svg>
-              <span>QR Pay</span>
-            </div>
-            <div class="app-quick-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 4h14l2 4v12a2 2 0 0 1-2 2H4z"/><path d="M2 8h18"/></svg>
-              <span>Bayad</span>
-            </div>
-          </div>
-          <div class="app-section-ttl">Recent <span>SEE ALL</span></div>
-          <div class="app-tx">
-            <div class="app-tx-item">
-              <div class="app-tx-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-              <div class="app-tx-info">
-                <span class="app-tx-name">Padala kay Nanay</span>
-                <span class="app-tx-sub">Today · 8:02 AM</span>
-              </div>
-              <span class="app-tx-amt">−₱1,200</span>
-            </div>
-            <div class="app-tx-item">
-              <div class="app-tx-icon" style="background:var(--graphite)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h14l2 4v12H4z"/></svg></div>
-              <div class="app-tx-info">
-                <span class="app-tx-name">Meralco Bayad</span>
-                <span class="app-tx-sub">Yesterday</span>
-              </div>
-              <span class="app-tx-amt">−₱2,340</span>
-            </div>
-            <div class="app-tx-item">
-              <div class="app-tx-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
-              <div class="app-tx-info">
-                <span class="app-tx-name">Cash-in · RBT Booth</span>
-                <span class="app-tx-sub">Tue · 4:15 PM</span>
-              </div>
-              <span class="app-tx-amt" style="color:#06A77D">+₱5,000</span>
-            </div>
-          </div>
-          <div class="app-nav">
-            <div class="app-nav-item active">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 7v11h-6v-6h-6v6H3V10z"/></svg>
-              <span>Home</span>
-            </div>
-            <div class="app-nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-              <span>Search</span>
-            </div>
-            <div class="app-nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-              <span>Services</span>
-            </div>
-            <div class="app-nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
-              <span>Account</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Phone 2: Send -->
-      <div class="phone">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="phone-status"><span>9:42</span><span>●●● ●●</span></div>
-          <div class="app-send-hdr">
-            <div class="app-back">←</div>
-            <div class="app-send-ttl">Magpadala</div>
-          </div>
-          <div class="app-amount-input">
-            <small>Halaga ng padala</small>
-            <div class="app-amount-val"><span class="peso">₱</span> 2,500</div>
-          </div>
-          <div style="margin:0 22px;padding:14px;background:var(--cream);border-radius:14px">
-            <div style="display:flex;align-items:center;gap:10px">
-              <div style="width:34px;height:34px;border-radius:50%;background:var(--red-deep);color:#fff;font-family:Archivo;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center">J</div>
-              <div style="flex:1">
-                <div style="font-size:12px;font-weight:700;color:var(--graphite)">Juan Dela Cruz</div>
-                <div style="font-size:10px;color:rgba(43,45,66,0.55);font-family:'JetBrains Mono'">+63 917 ●●● ●234</div>
-              </div>
-              <span style="font-size:9px;font-family:'JetBrains Mono';color:var(--red-deep);letter-spacing:0.1em">CHANGE</span>
-            </div>
-          </div>
-          <div class="app-keypad">
-            <div class="app-key">1</div><div class="app-key">2</div><div class="app-key">3</div>
-            <div class="app-key">4</div><div class="app-key">5</div><div class="app-key">6</div>
-            <div class="app-key">7</div><div class="app-key">8</div><div class="app-key">9</div>
-            <div class="app-key">.</div><div class="app-key">0</div><div class="app-key red">⌫</div>
-          </div>
-          <div class="app-send-btn" style="background:var(--red-deep)">I-tap para magpadala →</div>
-        </div>
-      </div>
-
-      <!-- Phone 3: QR Scanner -->
-      <div class="phone">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="app-qr-screen">
-            <div class="phone-status" style="color:#fff"><span>9:43</span><span>●●● ●●</span></div>
-            <div class="app-qr-hdr">
-              <div class="app-qr-ttl">Scan to Pay</div>
-              <div class="app-qr-x">✕</div>
-            </div>
-            <div class="app-qr-frame">
-              <div class="qr-window">
-                <div class="qr-c1"></div>
-                <div class="qr-c2"></div>
-                <div class="qr-line"></div>
-              </div>
-            </div>
-            <div class="app-qr-info">
-              <div class="app-qr-info-ttl">I-tutok sa QR code</div>
-              <div class="app-qr-info-sub">Hanapin ang QRPH sticker</div>
-            </div>
-            <div class="app-qr-pay">Manual Entry →</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- KIOSK + TERMINAL -->
-    <div class="kiosk-grid">
-      <!-- E-Tap Kiosk -->
-      <div class="kiosk">
-        <div class="kiosk-header">
-          <div class="kiosk-status"><span class="dot"></span> ONLINE · BOOTH 047</div>
-          <span>RBTap E-Tap · Plaza Branch</span>
-        </div>
-        <div class="kiosk-screen">
-          <div class="kiosk-screen-top">
-            <div class="kiosk-greet">Welcome to RBTap</div>
-            <svg width="44" viewBox="0 0 200 200">
-              <path d="M100 12 L172 52 L172 148 L100 188 L28 148 L28 52 Z" fill="#D90429"/>
-              <path d="M28 52 L100 92 L172 52 M100 92 L100 188" stroke="#FFFFFF" stroke-width="6" fill="none" stroke-linejoin="round"/>
-              <text x="64" y="84" font-family="Archivo" font-weight="900" font-size="30" fill="#FFFFFF" text-anchor="middle">R</text>
-              <text x="136" y="84" font-family="Archivo" font-weight="900" font-size="30" fill="#FFFFFF" text-anchor="middle">B</text>
-              <text x="100" y="150" font-family="Archivo" font-weight="900" font-size="30" fill="#FFFFFF" text-anchor="middle">T</text>
-            </svg>
-          </div>
-          <h2>Anong serbisyo<br/>ang <span class="red">kailangan mo?</span></h2>
-          <p class="kiosk-sub">Pumili ng transaksyon para magsimula</p>
-          <div class="kiosk-options">
-            <div class="kiosk-opt featured">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-              <span class="kiosk-opt-name">Cash-in</span>
-              <span class="kiosk-opt-sub">Mag-load sa wallet</span>
-            </div>
-            <div class="kiosk-opt">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h14l2 4v12H4z"/><path d="M2 8h18"/></svg>
-              <span class="kiosk-opt-name">Bills Payment</span>
-              <span class="kiosk-opt-sub">Meralco, PLDT, & more</span>
-            </div>
-            <div class="kiosk-opt">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 12h18M3 12l5-5M3 12l5 5M21 12l-5-5M21 12l-5 5"/></svg>
-              <span class="kiosk-opt-name">Padala</span>
-              <span class="kiosk-opt-sub">Remittance & transfer</span>
-            </div>
-            <div class="kiosk-opt">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              <span class="kiosk-opt-name">QR Pay</span>
-              <span class="kiosk-opt-sub">Scan & I-tap</span>
-            </div>
-          </div>
-          <div class="kiosk-footer">
-            <span>Available 24/7</span>
-            <span>HELP / TULONG ↑</span>
-          </div>
-        </div>
-        <div class="kiosk-base">— RBTAP E-TAP UNIT —</div>
-      </div>
-
-      <!-- Terminal + Receipt -->
-      <div class="terminal-stack">
-        <div class="terminal">
-          <div class="kiosk-header" style="margin-bottom:14px;padding-bottom:10px">
-            <div class="kiosk-status"><span class="dot"></span> CONNECTED</div>
-            <span>Countertop Terminal</span>
-          </div>
-          <div class="terminal-screen">
-            <div class="terminal-amt-lbl">Amount Due</div>
-            <div class="terminal-amt"><span class="peso">₱</span>2,540.<span style="font-size:0.55em;opacity:0.7">00</span></div>
-            <div class="terminal-info">
-              <div class="terminal-info-l">
-                <small>Merchant</small>
-                <div>Aling Nena Store · Iloilo</div>
-              </div>
-              <div style="text-align:right">
-                <small style="opacity:0.6;text-transform:uppercase">TAP TO PAY ●●●</small>
-              </div>
-            </div>
-          </div>
-          <div class="terminal-card-slot"></div>
-        </div>
-        <div class="terminal-receipt">
-          <div class="receipt-hdr">
-            <div class="name">RBTap</div>
-            <div class="sub">Plaza Branch · Iloilo · 06.21.2026</div>
-          </div>
-          <div class="receipt-row"><span>Service</span><span>Bills Payment</span></div>
-          <div class="receipt-row"><span>Biller</span><span>Meralco</span></div>
-          <div class="receipt-row"><span>Reference</span><span>0024-A9-7741</span></div>
-          <div class="receipt-row"><span>Amount</span><span>₱ 2,500.00</span></div>
-          <div class="receipt-row"><span>Service Fee</span><span>₱ 40.00</span></div>
-          <div class="receipt-row receipt-tot"><span>TOTAL</span><span>₱ 2,540.00</span></div>
-          <div style="text-align:center;margin-top:10px;font-size:9px;opacity:0.65">Salamat sa pag-tap! · Tap into digital access.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PHYSICAL ===== -->
-<section class="section physical-sec" id="physical">
-  <div class="container">
-    <div class="section-label">/ 07 — Physical & Print</div>
-    <h2 class="section-heading display">For every hand, badge,<br/>and booth na pasok ka.</h2>
-    <p class="section-intro">Business cards, ID badges, uniforms, and tarpaulins carry the brand into the offline world. The same red, the same geometric voice — recognizable from 50 meters away on a barangay road.</p>
-
-    <div class="print-grid-1">
-      <div class="cards-stack">
-        <div class="bcard front">
-          <div class="bcard-top">
-            <div class="bcard-logo">RB<span style="color:rgba(255,255,255,0.85)">Tap</span></div>
-            <div class="bcard-meta">RBS Group · 2026</div>
-          </div>
-          <div>
-            <div class="bcard-name">Maria Cristina Reyes</div>
-            <div class="bcard-role">Branch Officer · Iloilo</div>
-          </div>
-          <div class="bcard-bottom">
-            <div>+63 917 432 1908<br/>maria.reyes@rbtap.ph</div>
-            <div style="text-align:right">Tap Into<br/>Digital Access.</div>
-          </div>
-        </div>
-        <div class="bcard back">
-          <div class="bcard-top">
-            <div class="bcard-logo">RB<span class="tap">Tap</span></div>
-            <svg width="44" viewBox="0 0 200 200">
-              <path d="M100 12 L172 52 L172 148 L100 188 L28 148 L28 52 Z" fill="#D90429"/>
-              <path d="M28 52 L100 92 L172 52 M100 92 L100 188" stroke="#FFFFFF" stroke-width="6" fill="none" stroke-linejoin="round"/>
-              <text x="64" y="84" font-family="Archivo" font-weight="900" font-size="30" fill="#FFFFFF" text-anchor="middle">R</text>
-              <text x="136" y="84" font-family="Archivo" font-weight="900" font-size="30" fill="#FFFFFF" text-anchor="middle">B</text>
-              <text x="100" y="150" font-family="Archivo" font-weight="900" font-size="30" fill="#FFFFFF" text-anchor="middle">T</text>
-            </svg>
-          </div>
-          <div>
-            <div class="bcard-tag">Bayad Mo,<br/>Mas Madali.</div>
-          </div>
-          <div class="bcard-bottom" style="font-family:'JetBrains Mono';font-size:10px">
-            <div>rbtap.ph<br/>(02) 8888-RBT</div>
-            <div style="text-align:right">15 branches<br/>across PH</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ID -->
-      <div class="id-stack">
-        <div class="lanyard-strap"></div>
-        <div class="lanyard-clip"></div>
-        <div class="id-card">
-          <div class="id-top">
-            <div>
-              <div class="id-logo">RB<span class="tap">Tap</span></div>
-              <div class="id-tag">Authorized Agent</div>
-            </div>
-            <div style="font-family:'JetBrains Mono';font-size:8px;color:rgba(255,255,255,0.85);letter-spacing:0.15em;margin-top:10px">ID · 2026</div>
-          </div>
-          <div class="id-photo">M</div>
-          <div class="id-info">
-            <div class="id-name">Maria C. Reyes</div>
-            <div class="id-role">Branch Officer</div>
-            <div class="id-num">
-              <span>ID 04738</span>
-              <span>EXP 12/27</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tarpaulin -->
-    <div class="tarp">
-      <div class="tarp-content">
-        <div class="tarp-eyebrow">● Now Open · Iloilo Plaza Branch</div>
-        <h3 class="tarp-headline">Bayad mo,<br/><span>mas madali.</span></h3>
-        <div class="tarp-services">
-          <span>Cash-in</span>
-          <span>Cash-out</span>
-          <span>Bills Pay</span>
-          <span>Padala</span>
-          <span>QR Pay</span>
-          <span>Load</span>
-          <span>+9 more</span>
-        </div>
-      </div>
-      <div class="tarp-cta">
-        <div class="tarp-qr">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100" height="100" fill="#fff"/>
-            <g fill="#000">
-              <rect x="0" y="0" width="28" height="28"/><rect x="4" y="4" width="20" height="20" fill="#fff"/><rect x="8" y="8" width="12" height="12"/>
-              <rect x="72" y="0" width="28" height="28"/><rect x="76" y="4" width="20" height="20" fill="#fff"/><rect x="80" y="8" width="12" height="12"/>
-              <rect x="0" y="72" width="28" height="28"/><rect x="4" y="76" width="20" height="20" fill="#fff"/><rect x="8" y="80" width="12" height="12"/>
-              <rect x="32" y="4" width="4" height="4"/><rect x="40" y="4" width="4" height="4"/><rect x="48" y="0" width="4" height="4"/><rect x="56" y="4" width="4" height="4"/><rect x="64" y="0" width="4" height="4"/>
-              <rect x="32" y="12" width="8" height="4"/><rect x="44" y="8" width="4" height="8"/><rect x="52" y="12" width="4" height="4"/><rect x="60" y="8" width="8" height="4"/>
-              <rect x="4" y="32" width="4" height="4"/><rect x="12" y="36" width="4" height="4"/><rect x="20" y="32" width="4" height="4"/><rect x="32" y="32" width="4" height="8"/><rect x="40" y="36" width="8" height="4"/><rect x="52" y="32" width="4" height="4"/><rect x="60" y="36" width="4" height="4"/><rect x="68" y="32" width="4" height="4"/><rect x="76" y="32" width="4" height="4"/><rect x="84" y="36" width="4" height="4"/><rect x="92" y="32" width="4" height="4"/>
-              <rect x="4" y="44" width="4" height="4"/><rect x="16" y="40" width="8" height="4"/><rect x="28" y="48" width="4" height="4"/><rect x="36" y="44" width="8" height="4"/><rect x="48" y="40" width="4" height="8"/><rect x="56" y="48" width="4" height="4"/><rect x="64" y="44" width="4" height="4"/><rect x="72" y="40" width="4" height="4"/><rect x="80" y="48" width="8" height="4"/><rect x="92" y="44" width="4" height="4"/>
-              <rect x="8" y="52" width="4" height="4"/><rect x="20" y="56" width="4" height="4"/><rect x="32" y="52" width="8" height="4"/><rect x="44" y="56" width="4" height="4"/><rect x="52" y="52" width="4" height="8"/><rect x="60" y="56" width="8" height="4"/><rect x="72" y="52" width="4" height="4"/><rect x="80" y="56" width="4" height="4"/><rect x="88" y="52" width="4" height="4"/>
-              <rect x="36" y="64" width="4" height="4"/><rect x="44" y="68" width="4" height="4"/><rect x="52" y="64" width="8" height="4"/><rect x="64" y="68" width="4" height="4"/><rect x="72" y="64" width="4" height="4"/><rect x="80" y="68" width="8" height="4"/><rect x="92" y="64" width="4" height="4"/>
-              <rect x="32" y="76" width="4" height="4"/><rect x="40" y="80" width="4" height="4"/><rect x="48" y="76" width="4" height="4"/><rect x="56" y="80" width="4" height="8"/><rect x="64" y="76" width="8" height="4"/><rect x="76" y="80" width="4" height="4"/><rect x="84" y="76" width="4" height="4"/><rect x="92" y="80" width="4" height="4"/>
-              <rect x="32" y="88" width="4" height="4"/><rect x="44" y="88" width="4" height="4"/><rect x="52" y="92" width="8" height="4"/><rect x="64" y="88" width="4" height="4"/><rect x="72" y="92" width="4" height="4"/><rect x="80" y="88" width="4" height="4"/><rect x="88" y="92" width="4" height="4"/>
-            </g>
-            <!-- Center logo overlay -->
-            <rect x="38" y="38" width="24" height="24" fill="#fff"/>
-            <g transform="translate(40,40)">
-              <path d="M10 1 L18 6 L18 14 L10 19 L2 14 L2 6 Z" fill="#D90429"/>
-              <text x="10" y="13" font-family="Archivo" font-weight="900" font-size="8" fill="#fff" text-anchor="middle">R</text>
-            </g>
-          </svg>
-        </div>
-        <div class="tarp-cta-txt">I-scan para mag-download</div>
-        <div class="tarp-cta-sub">RBTAP.PH / DOWNLOAD</div>
-      </div>
-      <div class="tarp-corners">
-        <span>● TARPAULIN · 8×4 FT</span>
-        <span>RBTAP · NATIONWIDE</span>
-      </div>
-    </div>
-
-    <!-- Uniforms -->
-    <div class="uniform-row">
-      <div class="uniform-card">
-        <svg class="uniform-svg" viewBox="0 0 300 360" xmlns="http://www.w3.org/2000/svg">
-          <!-- Polo shirt outline -->
-          <path d="M70 90 L120 60 L130 80 L170 80 L180 60 L230 90 L260 140 L240 160 L230 150 L230 320 L70 320 L70 150 L60 160 L40 140 Z" fill="#D90429" stroke="none"/>
-          <!-- Collar -->
-          <path d="M120 60 L130 80 L150 95 L170 80 L180 60 L150 70 Z" fill="#B30122"/>
-          <path d="M150 70 L150 130" stroke="#FFF" stroke-width="2" stroke-dasharray="2 3" opacity="0.4"/>
-          <!-- Buttons -->
-          <circle cx="150" cy="100" r="2" fill="#FFF" opacity="0.6"/>
-          <circle cx="150" cy="115" r="2" fill="#FFF" opacity="0.6"/>
-          <!-- Chest logo -->
-          <g transform="translate(180,160)">
-            <path d="M14 2 L26 9 L26 22 L14 30 L2 22 L2 9 Z" fill="#FFFFFF"/>
-            <path d="M2 9 L14 16 L26 9 M14 16 L14 30" stroke="#D90429" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
-            <text x="14" y="38" font-family="Archivo" font-weight="900" font-size="11" fill="#FFFFFF" text-anchor="middle">RBTap</text>
-          </g>
-          <!-- Sleeve label -->
-          <text x="105" y="135" font-family="JetBrains Mono" font-size="6" fill="rgba(255,255,255,0.55)" letter-spacing="1">TEAM</text>
-        </svg>
-        <div class="uniform-caption">Field Polo · Brand Red</div>
-      </div>
-      <div class="uniform-card dark">
-        <svg class="uniform-svg" viewBox="0 0 300 360" xmlns="http://www.w3.org/2000/svg">
-          <!-- Tee outline (round neck) -->
-          <path d="M70 90 L120 60 L135 78 Q150 90 165 78 L180 60 L230 90 L260 140 L240 160 L230 150 L230 320 L70 320 L70 150 L60 160 L40 140 Z" fill="#FFFFFF" stroke="#EDF2F4" stroke-width="1"/>
-          <!-- Chest -->
-          <g transform="translate(125,180)">
-            <text x="0" y="0" font-family="Archivo" font-weight="900" font-size="40" fill="#2B2D42" letter-spacing="-2">RB<tspan fill="#D90429">Tap</tspan></text>
-            <text x="2" y="20" font-family="JetBrains Mono" font-size="8" fill="rgba(43,45,66,0.6)" letter-spacing="2">TAP INTO DIGITAL ACCESS</text>
-          </g>
-        </svg>
-        <div class="uniform-caption" style="color:rgba(255,255,255,0.6)">Crew Tee · White</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== MARKETING ===== -->
-<section class="section marketing-sec" id="marketing">
-  <div class="container">
-    <div class="section-label">/ 08 — Marketing & Retail</div>
-    <h2 class="section-heading display">Where the brand<br/>meets the bayan.</h2>
-    <p class="section-intro">QR standees on store counters, sticker decals on jeeps, branded social posts for kabataan on Facebook and TikTok — the system holds whether it's vinyl printed in a tiangge or rendered in a phone feed.</p>
-
-    <div class="standee-grid">
-      <!-- Standee -->
-      <div>
-        <div class="standee">
-          <div class="standee-board">
-            <div class="standee-eyebrow">● SCAN TO PAY HERE</div>
-            <div class="standee-logo">RB<span style="color:rgba(255,255,255,0.85)">Tap</span></div>
-            <div class="standee-qr">
-              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100" height="100" fill="#fff"/>
-                <g fill="#2B2D42">
-                  <rect x="0" y="0" width="26" height="26"/><rect x="4" y="4" width="18" height="18" fill="#fff"/><rect x="8" y="8" width="10" height="10"/>
-                  <rect x="74" y="0" width="26" height="26"/><rect x="78" y="4" width="18" height="18" fill="#fff"/><rect x="82" y="8" width="10" height="10"/>
-                  <rect x="0" y="74" width="26" height="26"/><rect x="4" y="78" width="18" height="18" fill="#fff"/><rect x="8" y="82" width="10" height="10"/>
-                  <rect x="30" y="4" width="4" height="4"/><rect x="38" y="0" width="4" height="8"/><rect x="46" y="4" width="8" height="4"/><rect x="58" y="0" width="4" height="4"/><rect x="66" y="4" width="4" height="4"/>
-                  <rect x="32" y="14" width="4" height="4"/><rect x="42" y="10" width="8" height="4"/><rect x="54" y="14" width="4" height="4"/><rect x="62" y="10" width="4" height="8"/>
-                  <rect x="4" y="32" width="4" height="4"/><rect x="14" y="36" width="4" height="4"/><rect x="22" y="32" width="4" height="4"/><rect x="30" y="32" width="8" height="4"/><rect x="42" y="36" width="4" height="4"/><rect x="50" y="32" width="4" height="8"/><rect x="58" y="36" width="8" height="4"/><rect x="70" y="32" width="4" height="4"/><rect x="78" y="36" width="4" height="4"/><rect x="86" y="32" width="4" height="4"/>
-                  <rect x="8" y="42" width="4" height="4"/><rect x="18" y="46" width="4" height="4"/><rect x="28" y="42" width="4" height="4"/><rect x="36" y="46" width="8" height="4"/><rect x="48" y="42" width="4" height="4"/><rect x="56" y="46" width="4" height="4"/><rect x="64" y="42" width="8" height="4"/><rect x="76" y="46" width="4" height="4"/><rect x="84" y="42" width="4" height="4"/><rect x="92" y="46" width="4" height="4"/>
-                  <rect x="4" y="54" width="4" height="4"/><rect x="14" y="58" width="8" height="4"/><rect x="26" y="54" width="4" height="4"/><rect x="34" y="58" width="4" height="4"/><rect x="42" y="54" width="8" height="4"/><rect x="54" y="58" width="4" height="4"/><rect x="62" y="54" width="4" height="4"/><rect x="70" y="58" width="4" height="4"/><rect x="78" y="54" width="8" height="4"/><rect x="90" y="58" width="4" height="4"/>
-                  <rect x="32" y="66" width="4" height="4"/><rect x="40" y="70" width="4" height="4"/><rect x="50" y="66" width="8" height="4"/><rect x="62" y="70" width="4" height="4"/><rect x="72" y="66" width="4" height="4"/><rect x="80" y="70" width="8" height="4"/><rect x="92" y="66" width="4" height="4"/>
-                  <rect x="30" y="78" width="4" height="4"/><rect x="38" y="82" width="4" height="4"/><rect x="46" y="78" width="4" height="4"/><rect x="54" y="82" width="4" height="8"/><rect x="62" y="78" width="8" height="4"/><rect x="74" y="82" width="4" height="4"/><rect x="82" y="78" width="4" height="4"/><rect x="90" y="82" width="4" height="4"/>
-                  <rect x="30" y="90" width="4" height="4"/><rect x="40" y="90" width="4" height="4"/><rect x="50" y="94" width="8" height="4"/><rect x="62" y="90" width="4" height="4"/><rect x="70" y="94" width="4" height="4"/><rect x="78" y="90" width="4" height="4"/><rect x="88" y="94" width="4" height="4"/>
-                </g>
-                <rect x="38" y="38" width="24" height="24" fill="#fff"/>
-                <g transform="translate(40,40)">
-                  <path d="M10 1 L18 6 L18 14 L10 19 L2 14 L2 6 Z" fill="#D90429"/>
-                  <text x="10" y="13" font-family="Archivo" font-weight="900" font-size="8" fill="#fff" text-anchor="middle">R</text>
-                </g>
-              </svg>
-            </div>
-            <div class="standee-line">Bayad Mo,<br/>Mas Madali.</div>
-            <div class="standee-sub">RBTAP QR · ALL E-WALLETS</div>
-          </div>
-          <div class="standee-base"></div>
-          <div style="text-align:center;margin-top:14px;font-family:'JetBrains Mono';font-size:10px;color:rgba(43,45,66,0.55);letter-spacing:0.12em;text-transform:uppercase">A4 Counter Standee · QR</div>
-        </div>
-      </div>
-
-      <!-- Social Grid -->
-      <div>
-        <div class="social-grid">
-          <div class="social-post red">
-            <div class="social-hashtag">#TapIntoAccess</div>
-            <div class="social-headline">Bayad mo,<br/>mas <span style="color:#fff;text-decoration:underline">madali</span>.</div>
-            <div class="social-foot">
-              <span>@rbtap.ph</span>
-              <svg class="social-mark" viewBox="0 0 200 200">
-                <path d="M100 12 L172 52 L172 148 L100 188 L28 148 L28 52 Z" fill="none" stroke="#fff" stroke-width="10"/>
-              </svg>
-            </div>
-          </div>
-          <div class="social-post dark">
-            <div class="social-hashtag" style="color:rgba(255,255,255,0.6)">#Tutorial · 01</div>
-            <div class="social-headline">Pano mag<br/>cash-in<span class="accent">?</span></div>
-            <div class="social-foot">
-              <span>Swipe →</span>
-              <span>0:14</span>
-            </div>
-          </div>
-          <div class="social-post bright">
-            <div class="social-hashtag">#NewBranch</div>
-            <div class="social-headline">Open na<br/>sa <span style="color:#fff;text-decoration:underline">Iloilo!</span></div>
-            <div class="social-foot">
-              <span>● LIVE</span>
-              <span>Plaza St.</span>
-            </div>
-          </div>
-          <div class="social-post cream">
-            <div class="social-hashtag" style="color:var(--red-deep)">#KuwentongRBTap</div>
-            <div class="social-headline" style="color:var(--graphite)">"Madali lang. Trusted pa."<br/><span style="font-size:11px;font-weight:400;font-family:'Hanken Grotesk';color:rgba(43,45,66,0.6);letter-spacing:0;line-height:1.4;display:block;margin-top:8px">— Aling Nena, Iloilo</span></div>
-            <div class="social-foot" style="color:rgba(43,45,66,0.6)">
-              <span>Testimonial</span>
-              <svg class="social-mark" viewBox="0 0 200 200">
-                <path d="M100 12 L172 52 L172 148 L100 188 L28 148 L28 52 Z" fill="#D90429"/>
-              </svg>
-            </div>
-          </div>
-          <div class="social-post white">
-            <div class="social-hashtag" style="color:var(--red-deep)">#Promo · LIMITED</div>
-            <div class="social-headline" style="color:var(--graphite)">Zero fee.<br/><span style="color:var(--red-deep)">Pang-uno.</span></div>
-            <div class="social-foot" style="color:rgba(43,45,66,0.55)">
-              <span>Til Jun 30</span>
-              <span>T&Cs apply</span>
-            </div>
-          </div>
-          <div class="social-post silver">
-            <div class="social-hashtag" style="color:var(--red-deep)">#Anywhere</div>
-            <div class="social-headline" style="color:var(--graphite)">14 services.<br/><span style="color:var(--red-deep)">1 booth.</span></div>
-            <div class="social-foot" style="color:rgba(43,45,66,0.55)">
-              <span>rbtap.ph</span>
-              <span>↗</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Stickers -->
-    <div class="sticker-row">
-      <div class="sticker circle">TAP TO PAY<small>● ACCEPTED HERE</small></div>
-      <div class="sticker badge">RBTap<br/>AGENT<br/>● 2026</div>
-      <div class="sticker pill">Bayad Mo, Mas Madali.</div>
-      <div class="sticker square">FAST<br/>EASY<br/>TRUSTED</div>
-      <div class="sticker hex">CONNECTED<br/>KA DITO</div>
-    </div>
-    <div style="text-align:center;margin-top:20px;font-family:'JetBrains Mono';font-size:11px;color:rgba(43,45,66,0.55);letter-spacing:0.12em;text-transform:uppercase">Decal System · Window · Vehicle · Booth</div>
-  </div>
-</section>
-
 <!-- ===== TAGLINES ===== -->
-<section class="section tagline-sec" id="taglines">
+<section class="section tagline-sec" id="taglines" data-section-name="Taglines" data-section-num="06">
   <div class="container">
     <div class="section-label">/ 09 — Voice & Taglines</div>
     <h2 class="section-heading display" style="color:#fff">Eight ways to say<br/>the same thing.</h2>
@@ -1625,6 +1067,100 @@ body{
     </div>
   </div>
 </footer>
+
+<!-- Scroll progress bar (always at the very top of the viewport) -->
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+<script>
+(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- 1. Scroll-driven reveals on every section ----------
+  const sections = Array.from(document.querySelectorAll('.section, .hero, .footer'));
+  // Hero is already visible on load (above the fold) — no FOUC flash
+  document.querySelector('.hero')?.classList.add('is-visible');
+
+  if (!reduce && 'IntersectionObserver' in window) {
+    const reveal = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            reveal.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.08 }
+    );
+    sections.forEach((s) => reveal.observe(s));
+  } else {
+    sections.forEach((s) => s.classList.add('is-visible'));
+  }
+
+  // ---------- 2. Scroll progress bar (top of viewport) ----------
+  const progressBar = document.getElementById('scroll-progress');
+  const tickProgress = () => {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+    progressBar.style.width = pct.toFixed(2) + '%';
+  };
+  tickProgress();
+
+  // ---------- 3. Active section indicator in the nav ----------
+  const indicator = document.getElementById('nav-section-indicator');
+  const labelEl   = indicator?.querySelector('.label');
+  const numEl     = indicator?.querySelector('.num');
+  const tagged    = Array.from(document.querySelectorAll('[data-section-name]'));
+
+  let currentId = null;
+  const updateIndicator = () => {
+    if (!indicator || tagged.length === 0) return;
+    // Find the deepest section whose top is above the 35% line of viewport
+    const mid = window.scrollY + window.innerHeight * 0.35;
+    let active = tagged[0];
+    for (const sec of tagged) {
+      if (sec.offsetTop <= mid) active = sec;
+    }
+    if (active.id === currentId) return;
+    currentId = active.id;
+    indicator.classList.add('is-fading');
+    setTimeout(() => {
+      labelEl.textContent = active.dataset.sectionName || '';
+      numEl.textContent   = active.dataset.sectionNum  || '';
+      indicator.classList.remove('is-fading');
+    }, 180);
+  };
+  updateIndicator();
+
+  // ---------- 4. Subtle parallax on .parallax-slow elements ----------
+  const parallaxEls = Array.from(document.querySelectorAll('.parallax-slow'));
+  const updateParallax = () => {
+    const y = window.scrollY;
+    for (const el of parallaxEls) {
+      el.style.transform = 'translate3d(0,' + (y * -0.18).toFixed(1) + 'px,0)';
+    }
+  };
+
+  // Single rAF-throttled scroll handler for progress + indicator + parallax
+  let pending = false;
+  window.addEventListener('scroll', () => {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => {
+      tickProgress();
+      updateIndicator();
+      if (!reduce) updateParallax();
+      pending = false;
+    });
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    currentId = null;
+    updateIndicator();
+  }, { passive: true });
+})();
+</script>
 
 </body>
 </html>

@@ -8,7 +8,26 @@
       "Bash(curl -s -o /dev/null -w \"pulse-fusion: %{http_code}\\\\n\" http://localhost:5173/brand-books/pulse-fusion.html)",
       "Bash(python -c ' *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(sed -i 's|<section class=\"hero\" id=\"hero\">|<section class=\"hero\" id=\"hero\" data-section-name=\"Introduction\" data-section-num=\"01\">|' rbtap-brand-identity.html)",
+      "Bash(sed -i 's|<section class=\"section essence\" id=\"essence\">|<section class=\"section essence\" id=\"essence\" data-section-name=\"Essence\" data-section-num=\"02\">|' rbtap-brand-identity.html)",
+      "Bash(sed -i 's|<section class=\"section logo-sys\" id=\"logo\">|<section class=\"section logo-sys\" id=\"logo\" data-section-name=\"Logo System\" data-section-num=\"03\">|' rbtap-brand-identity.html)",
+      "Bash(sed -i 's|<section class=\"section color-sec\" id=\"color\">|<section class=\"section color-sec\" id=\"color\" data-section-name=\"Color\" data-section-num=\"04\">|' rbtap-brand-identity.html)",
+      "Bash(sed -i 's|<section class=\"section type-sec\" id=\"typography\">|<section class=\"section type-sec\" id=\"typography\" data-section-name=\"Typography\" data-section-num=\"05\">|' rbtap-brand-identity.html)",
+      "Bash(sed -i 's|<div class=\"hero-grid-bg\"></div>|<div class=\"hero-grid-bg parallax-slow\"></div>|' rbtap-brand-identity.html)",
+      "Bash(curl -s -o /dev/null -w \"rbtap: %{http_code}\\\\n\" http://localhost:5173/rbtap-brand-identity.html)",
+      "Bash(sed -n '635,640p' c:/Users/JENZEN/Documents/Broadheader/Guabao/public/brand-books/rbtap.html)",
+      "Bash(sed -n '977,982p' c:/Users/JENZEN/Documents/Broadheader/Guabao/public/brand-books/rbtap.html)",
+      "Bash(python c:/tmp/rbtap-edit.py)",
+      "Bash(curl -s -o /dev/null -w \"rbtap.html: %{http_code}\\\\n\" http://localhost:5173/brand-books/rbtap.html)",
+      "Bash(curl -s -o /dev/null -w \"concept-800.webp: %{http_code}\\\\n\" http://localhost:5173/assets/rbtap-concept-800.webp)",
+      "Bash(curl -s -o /dev/null -w \"concept-1600.webp: %{http_code}\\\\n\" http://localhost:5173/assets/rbtap-concept-1600.webp)",
+      "Bash(sed -n '597,615p' c:/Users/JENZEN/Documents/Broadheader/Guabao/public/brand-books/rbtap.html)",
+      "Bash(sed -n '625,635p' c:/Users/JENZEN/Documents/Broadheader/Guabao/public/brand-books/rbtap.html)",
+      "Bash(sed -n '643,665p' c:/Users/JENZEN/Documents/Broadheader/Guabao/public/brand-books/rbtap.html)",
+      "Bash(curl -s -o /dev/null -w \"rbs-logo-120: %{http_code}\\\\n\" http://localhost:5173/assets/rbs-logo-120.webp)",
+      "Bash(curl -s -o /dev/null -w \"rbs-logo-320: %{http_code}\\\\n\" http://localhost:5173/assets/rbs-logo-320.webp)",
+      "Bash(curl -s -o /dev/null -w \"rbs-logo-600: %{http_code}\\\\n\" http://localhost:5173/assets/rbs-logo-600.webp)"
     ]
   }
 }
