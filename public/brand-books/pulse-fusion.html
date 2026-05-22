@@ -1129,7 +1129,8 @@
     background: radial-gradient(circle, rgba(245,184,46,0.22), transparent 60%);
     filter: blur(40px);
   }
-  .bolero-art svg {
+  .bolero-art svg,
+  .bolero-art img {
     position: relative;
     width: 100%;
     max-width: 380px;
@@ -1232,7 +1233,7 @@
 
   @media (max-width: 800px) {
     .bolero-stage { grid-template-columns: 1fr; gap: 3vh; }
-    .bolero-art svg { max-width: 60vw; }
+    .bolero-art svg, .bolero-art img { max-width: 60vw; }
     .bolero-menu { grid-template-columns: 1fr; gap: 0.8rem; }
     .bolero-palette .b-swatch { width: 44px; height: 44px; }
   }
@@ -1863,57 +1864,14 @@
   </div>
 
   <div class="bolero-stage">
-    <div class="bolero-art" aria-hidden="true">
-      <!-- Inline meatball-on-skewer SVG matching the Boleros visual language -->
-      <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="bo-ball" cx="35%" cy="28%" r="68%">
-            <stop offset="0%" stop-color="#D08A4A"/>
-            <stop offset="55%" stop-color="#7A3416"/>
-            <stop offset="100%" stop-color="#3A170B"/>
-          </radialGradient>
-          <radialGradient id="bo-bowl" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#F5B82E"/>
-            <stop offset="100%" stop-color="#D8262D"/>
-          </radialGradient>
-        </defs>
-        <!-- bowl underneath -->
-        <ellipse cx="160" cy="270" rx="120" ry="22" fill="rgba(0,0,0,0.4)" filter="blur(4px)"/>
-        <path d="M50 240 L270 240 L255 290 Q250 300 235 300 L85 300 Q70 300 65 290 Z" fill="url(#bo-bowl)" stroke="#1A0F0A" stroke-width="5"/>
-        <ellipse cx="160" cy="240" rx="110" ry="14" fill="#7A0A12" stroke="#1A0F0A" stroke-width="4"/>
-        <!-- skewer behind -->
-        <line x1="80" y1="280" x2="240" y2="50" stroke="#D4B074" stroke-width="9" stroke-linecap="round"/>
-        <line x1="80" y1="280" x2="240" y2="50" stroke="#1A0F0A" stroke-width="2"/>
-        <!-- 3 meatballs -->
-        <g stroke="#1A0F0A" stroke-width="6">
-          <circle cx="115" cy="220" r="46" fill="url(#bo-ball)"/>
-          <circle cx="175" cy="155" r="46" fill="url(#bo-ball)"/>
-          <circle cx="225" cy="90"  r="40" fill="url(#bo-ball)"/>
-        </g>
-        <!-- bumpy texture -->
-        <g fill="#3A170B" opacity="0.55">
-          <circle cx="100" cy="210" r="5"/>
-          <circle cx="130" cy="234" r="4"/>
-          <circle cx="160" cy="148" r="5"/>
-          <circle cx="195" cy="170" r="4"/>
-          <circle cx="220" cy="80" r="4"/>
-        </g>
-        <!-- shine highlights -->
-        <g fill="#FFE074" opacity="0.85">
-          <ellipse cx="100" cy="200" rx="14" ry="6" transform="rotate(-28 100 200)"/>
-          <ellipse cx="162" cy="138" rx="13" ry="6" transform="rotate(-28 162 138)"/>
-          <ellipse cx="214" cy="78" rx="11" ry="5" transform="rotate(-28 214 78)"/>
-        </g>
-        <!-- parsley flecks -->
-        <g fill="#3A8C2A" stroke="#1A0F0A" stroke-width="1">
-          <ellipse cx="138" cy="190" rx="6" ry="3" transform="rotate(20 138 190)"/>
-          <ellipse cx="195" cy="130" rx="5" ry="3" transform="rotate(-15 195 130)"/>
-          <ellipse cx="215" cy="115" rx="4" ry="2" transform="rotate(40 215 115)"/>
-        </g>
-        <!-- sauce drip from top meatball -->
-        <path d="M210 105 Q215 130 220 150" fill="none" stroke="#D8262D" stroke-width="5" stroke-linecap="round"/>
-        <path d="M205 100 Q198 115 195 130" fill="none" stroke="#D8262D" stroke-width="4" stroke-linecap="round"/>
-      </svg>
+    <div class="bolero-art">
+      <img
+        src="/assets/boleros-hero-800.webp"
+        srcset="/assets/boleros-hero-400.webp 400w, /assets/boleros-hero-800.webp 800w"
+        sizes="(max-width: 800px) 60vw, 380px"
+        alt="Bola-Bola Boy — the Boleros Meatballs mascot, holding a tray of meatballs"
+        decoding="async"
+      />
     </div>
 
     <div class="bolero-meta">
