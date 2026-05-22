@@ -1198,7 +1198,20 @@
     transform: translateY(-4px);
     border-color: rgba(245,184,46,0.45);
   }
-  .bolero-item .b-icon { font-size: 2.4rem; line-height: 1; }
+  .bolero-item .b-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 64px;
+    margin-bottom: 0.2rem;
+  }
+  .bolero-item .b-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35));
+  }
   .bolero-item .label { color: var(--bo-cream); opacity: 0.85; font-size: 0.62rem; }
   .bolero-item .desc {
     font-family: 'Fraunces', serif;
@@ -1892,19 +1905,88 @@
   <p class="label" style="color: rgba(251,233,196,0.55); margin-bottom: 2vh;">TATLONG BOLA · THREE WAYS TO TIRA</p>
   <div class="bolero-menu">
     <a class="bolero-item" href="boleros.html#products">
-      <span class="b-icon" aria-hidden="true">🍖</span>
+      <span class="b-icon" aria-hidden="true">
+        <!-- Beef Balls — single meatball, parsley fleck, golden glaze -->
+        <svg viewBox="0 0 80 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="bb-beef" cx="35%" cy="28%" r="68%">
+              <stop offset="0%" stop-color="#D08A4A"/>
+              <stop offset="55%" stop-color="#7A3416"/>
+              <stop offset="100%" stop-color="#3A170B"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="40" cy="58" rx="22" ry="3" fill="rgba(0,0,0,0.35)"/>
+          <circle cx="40" cy="34" r="24" fill="url(#bb-beef)" stroke="#1A0F0A" stroke-width="2.5"/>
+          <g fill="#3A170B" opacity="0.55">
+            <circle cx="32" cy="46" r="2"/>
+            <circle cx="48" cy="42" r="1.6"/>
+            <circle cx="36" cy="24" r="1.6"/>
+          </g>
+          <ellipse cx="32" cy="24" rx="7" ry="3" fill="#FFE074" opacity="0.9" transform="rotate(-28 32 24)"/>
+          <ellipse cx="44" cy="16" rx="3" ry="1.6" fill="#3A8C2A" stroke="#1A0F0A" stroke-width="0.7" transform="rotate(20 44 16)"/>
+        </svg>
+      </span>
       <span class="label">Signature</span>
       <span class="desc">Beef Balls</span>
       <span class="price">₱69 · 6 PCS</span>
     </a>
     <a class="bolero-item" href="boleros.html#products">
-      <span class="b-icon" aria-hidden="true">🥩</span>
+      <span class="b-icon" aria-hidden="true">
+        <!-- Moink Balls — pork + beef, two stacked meatballs, slightly warmer tone -->
+        <svg viewBox="0 0 80 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="bb-moink" cx="35%" cy="28%" r="68%">
+              <stop offset="0%" stop-color="#E09870"/>
+              <stop offset="55%" stop-color="#8B3416"/>
+              <stop offset="100%" stop-color="#3A170B"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="40" cy="58" rx="24" ry="3" fill="rgba(0,0,0,0.35)"/>
+          <circle cx="50" cy="40" r="18" fill="url(#bb-moink)" stroke="#1A0F0A" stroke-width="2.5"/>
+          <circle cx="28" cy="28" r="17" fill="url(#bb-moink)" stroke="#1A0F0A" stroke-width="2.5"/>
+          <g fill="#3A170B" opacity="0.55">
+            <circle cx="22" cy="34" r="1.6"/>
+            <circle cx="56" cy="46" r="1.6"/>
+          </g>
+          <ellipse cx="22" cy="22" rx="6" ry="2.5" fill="#FFE074" opacity="0.9" transform="rotate(-28 22 22)"/>
+          <ellipse cx="44" cy="34" rx="5" ry="2.5" fill="#FFE074" opacity="0.9" transform="rotate(-28 44 34)"/>
+        </svg>
+      </span>
       <span class="label">Pork + Beef</span>
       <span class="desc">Moink Balls</span>
       <span class="price">₱79 · 6 PCS</span>
     </a>
     <a class="bolero-item" href="boleros.html#products">
-      <span class="b-icon" aria-hidden="true">🧊</span>
+      <span class="b-icon" aria-hidden="true">
+        <!-- Frozen Beef — meatball with frost crystals + chilled blue halo -->
+        <svg viewBox="0 0 80 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="bb-frost" cx="35%" cy="28%" r="68%">
+              <stop offset="0%" stop-color="#D08A4A"/>
+              <stop offset="55%" stop-color="#7A3416"/>
+              <stop offset="100%" stop-color="#3A170B"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="40" cy="58" rx="22" ry="3" fill="rgba(0,0,0,0.35)"/>
+          <circle cx="40" cy="34" r="24" fill="url(#bb-frost)" stroke="#1A0F0A" stroke-width="2.5"/>
+          <!-- frost dust around the meatball -->
+          <g fill="#E8F4FF" opacity="0.85">
+            <circle cx="40" cy="34" r="24" fill="none" stroke="#B4D8E8" stroke-width="1.5" opacity="0.55"/>
+            <circle cx="22" cy="20" r="2"/>
+            <circle cx="60" cy="22" r="1.6"/>
+            <circle cx="64" cy="40" r="1.4"/>
+            <circle cx="18" cy="44" r="1.4"/>
+          </g>
+          <!-- snowflake mark -->
+          <g stroke="#E8F4FF" stroke-width="1.4" stroke-linecap="round" opacity="0.95">
+            <line x1="56" y1="14" x2="56" y2="22"/>
+            <line x1="52" y1="18" x2="60" y2="18"/>
+            <line x1="53.2" y1="15.2" x2="58.8" y2="20.8"/>
+            <line x1="58.8" y1="15.2" x2="53.2" y2="20.8"/>
+          </g>
+          <ellipse cx="32" cy="24" rx="7" ry="3" fill="#FFE074" opacity="0.85" transform="rotate(-28 32 24)"/>
+        </svg>
+      </span>
       <span class="label">Take-home</span>
       <span class="desc">Frozen Beef</span>
       <span class="price">₱149 · 25 PCS</span>
