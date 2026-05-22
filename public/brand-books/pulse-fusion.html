@@ -1236,6 +1236,165 @@
     .bolero-menu { grid-template-columns: 1fr; gap: 0.8rem; }
     .bolero-palette .b-swatch { width: 44px; height: 44px; }
   }
+
+  /* ===== Editorial Cover — replaces the old cover composition ===== */
+  .cover--editorial {
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    color: var(--cream);
+    /* Deep red radial — brighter in the middle, deepening toward edges */
+    background:
+      radial-gradient(ellipse at 50% 50%, #D81F2A 0%, #B8131F 55%, #7A0A12 100%);
+    background-color: #8B0A1F;
+  }
+  /* Hide any leftover decorative elements from the old cover that might still be rendered */
+  .cover--editorial .cover-bignum,
+  .cover--editorial .cover-sun,
+  .cover--editorial .ecg,
+  .cover--editorial .cover-tape,
+  .cover--editorial .cover-grid,
+  .cover--editorial .cover-meta,
+  .cover--editorial::before { display: none !important; }
+
+  .cover-topbar,
+  .cover-bottombar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.6rem 2.4rem;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cream);
+    z-index: 3;
+  }
+  .cover-topbar    { top: 0;    border-bottom: 1px solid rgba(244,236,220,0.18); }
+  .cover-bottombar { bottom: 0; border-top:    1px solid rgba(244,236,220,0.18); }
+  .cover-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: var(--cream);
+    border-radius: 50%;
+    margin-right: 0.8rem;
+    vertical-align: middle;
+  }
+
+  .cover-stack {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+    padding: 7rem 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cover-eyebrow {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  .cover-mark {
+    font-family: 'Fraunces', serif;
+    font-variation-settings: "opsz" 144, "SOFT" 0;
+    font-weight: 500;
+    font-size: clamp(3.6rem, 12vw, 12rem);
+    line-height: 0.86;
+    letter-spacing: -0.045em;
+    color: var(--cream);
+    margin: 0.2rem 0 0;
+    text-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  }
+
+  .cover-mark-sub {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+    line-height: 1;
+    margin: -0.2rem 0 0;
+    color: var(--cream);
+  }
+  .cover-mark-sub .rule {
+    display: inline-block;
+    margin: 0 0.6rem;
+    opacity: 0.55;
+    font-style: normal;
+  }
+
+  .cover-tagline {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1rem, 1.4vw, 1.35rem);
+    line-height: 1.3;
+    margin: 0.4rem 0 0;
+  }
+  .cover-tagline em { font-style: italic; opacity: 0.92; }
+
+  .cover-divider {
+    width: 64px;
+    height: 1px;
+    background: rgba(244,236,220,0.40);
+    margin: 0.4rem 0 0.2rem;
+  }
+
+  .cover-kitchens-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    margin: 0;
+    opacity: 0.75;
+  }
+
+  .cover-kitchens {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+    line-height: 1.4;
+    margin: 0;
+  }
+  .cover-kitchens a {
+    color: var(--cream);
+    text-decoration: none;
+    transition: opacity 180ms ease;
+  }
+  .cover-kitchens a:hover { opacity: 0.78; }
+  .cover-kitchens em { font-style: italic; }
+  .cover-kitchens .cover-mid-dot {
+    margin: 0 0.6rem;
+    opacity: 0.45;
+  }
+  .cover-kitchens .muted {
+    font-style: italic;
+    opacity: 0.45;
+  }
+
+  @media (max-width: 768px) {
+    .cover-topbar, .cover-bottombar {
+      padding: 1.1rem 1.4rem;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+    }
+    .cover-stack { padding: 5rem 1.2rem; gap: 1.1rem; }
+    .cover-mark { font-size: clamp(2.8rem, 14vw, 4.6rem); }
+    .cover-mark-sub { font-size: clamp(1.2rem, 4vw, 1.6rem); }
+    .cover-kitchens .cover-mid-dot { margin: 0 0.35rem; }
+    .cover-kitchens { font-size: 0.95rem; }
+  }
 </style>
 </head>
 <body>
@@ -1243,57 +1402,39 @@
 <!-- TOP NAV REMOVED — cover-tape and section numbers now handle context -->
 
 <!-- 01 · COVER -->
-<section class="cover" id="cover">
+<section class="cover cover--editorial" id="cover">
 
-  <!-- Editorial top tape -->
-  <div class="cover-tape">
-    <span><span class="pulse-dot"></span>BRAND IDENTITY · EDITION 01 · MMXXVI</span>
-    <span>MNL · 14.5995°N / 120.9842°E</span>
+  <!-- Top utility bar -->
+  <div class="cover-topbar">
+    <span><span class="cover-dot"></span>Pulse Fusion Republic</span>
+    <span>Edition I · MMXXVI</span>
   </div>
 
-  <!-- 8-rayed sun motif (flag reference) -->
-  <svg class="cover-sun" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-    <g fill="#F4ECDC">
-      <circle cx="100" cy="100" r="22"/>
-      <g>
-        <polygon points="100,0 108,75 92,75"/>
-        <polygon points="200,100 125,108 125,92"/>
-        <polygon points="100,200 92,125 108,125"/>
-        <polygon points="0,100 75,92 75,108"/>
-        <polygon points="170,30 118,82 130,93"/>
-        <polygon points="170,170 117,118 107,130"/>
-        <polygon points="30,170 82,117 92,128"/>
-        <polygon points="30,30 82,82 93,71"/>
-      </g>
-    </g>
-  </svg>
+  <!-- Centered editorial mark stack -->
+  <div class="cover-stack">
+    <p class="cover-eyebrow">A Filipino Hospitality Group</p>
 
-  <!-- Huge edition number behind -->
-  <div class="cover-bignum">01</div>
+    <h1 class="cover-mark">Pulse Fusion</h1>
+    <p class="cover-mark-sub"><span class="rule">—</span> Republic <span class="rule">—</span></p>
 
-  <!-- Dramatic ECG -->
-  <svg class="ecg" viewBox="0 0 1400 80" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 40 L280 40 L300 40 L315 8 L330 72 L345 4 L360 78 L375 40 L680 40 L700 40 L715 10 L730 70 L745 6 L760 76 L775 40 L1080 40 L1100 40 L1115 12 L1130 68 L1145 8 L1160 72 L1175 40 L1400 40" stroke="#F4ECDC" stroke-width="2"/>
-  </svg>
+    <p class="cover-tagline">Locally Flavoured, <em>Globally Craved.</em></p>
 
-  <div class="cover-grid">
-    <h1 class="cover-title">
-      <span class="lineA">Pulse</span>
-      <span class="lineB">Fusion</span>
-      <span class="lineC">Republic</span>
-    </h1>
+    <div class="cover-divider"></div>
 
-    <p class="cover-hero-tag">Locally Flavoured, <em>Globally Craved.</em></p>
-  </div>
-
-  <div class="cover-meta">
-    <p class="tagline">
-      A republic of Filipino<br>
-      fusion kitchens.
+    <p class="cover-kitchens-label">The Kitchens</p>
+    <p class="cover-kitchens">
+      <a href="#mang-guabao"><em>Mang Guabao</em></a>
+      <span class="cover-mid-dot">·</span>
+      <a href="#boleros-meatballs"><em>Bolero's Meatballs</em></a>
+      <span class="cover-mid-dot">·</span>
+      <span class="muted">More to come</span>
     </p>
-    <span style="font-family: 'Geist Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.7;">
-      ◉ #CE1126 · OLD GLORY RED
-    </span>
+  </div>
+
+  <!-- Bottom utility bar -->
+  <div class="cover-bottombar">
+    <span>Established in Manila</span>
+    <span>14.5995°N · 120.9842°E</span>
   </div>
 </section>
 
