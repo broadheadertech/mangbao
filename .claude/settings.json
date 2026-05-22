@@ -27,7 +27,11 @@
       "Bash(sed -n '643,665p' c:/Users/JENZEN/Documents/Broadheader/Guabao/public/brand-books/rbtap.html)",
       "Bash(curl -s -o /dev/null -w \"rbs-logo-120: %{http_code}\\\\n\" http://localhost:5173/assets/rbs-logo-120.webp)",
       "Bash(curl -s -o /dev/null -w \"rbs-logo-320: %{http_code}\\\\n\" http://localhost:5173/assets/rbs-logo-320.webp)",
-      "Bash(curl -s -o /dev/null -w \"rbs-logo-600: %{http_code}\\\\n\" http://localhost:5173/assets/rbs-logo-600.webp)"
+      "Bash(curl -s -o /dev/null -w \"rbs-logo-600: %{http_code}\\\\n\" http://localhost:5173/assets/rbs-logo-600.webp)",
+      "Bash(sed -i '1758,1800d' public/brand-books/pulse-fusion.html)",
+      "Bash(sed -i '1552,1598d' public/brand-books/pulse-fusion.html)",
+      "Bash(sed -i '1499,1551d' public/brand-books/pulse-fusion.html)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/brand-books/pulse-fusion.html)"
     ]
   }
 }
